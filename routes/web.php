@@ -19,6 +19,11 @@ Route::post('login', 'LoginCtrl@login_proses')->name('login.proses');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'DashboardCtrl@index')->name('dashboard.index');
     Route::get('/dashboard', 'DashboardCtrl@index')->name('dashboard.index');
+
+    Route::get('/kriteria', 'KriteriaCtrl@index')->name('kriteria.index');
+    Route::get('/dimensi', 'DimensiCtrl@index')->name('dimensi.index');
+    Route::get('/kuisioner', 'KuisionerCtrl@index')->name('kuisioner.index');
+
     Route::get('/logout', 'LoginCtrl@logout')->name('logout');
 });
 

@@ -15396,7 +15396,7 @@ be a descendant of the grid when it is being dragged.
     text-align: center;
     font-family: 'Arial';
     padding: 0 15px;
-    font-size: 26px;
+    font-size: 15px;
     font-weight: 400;
     line-height: 50px;
 }
@@ -15654,7 +15654,6 @@ be a descendant of the grid when it is being dragged.
     -ms-flex-align: center;
     align-items: center;
     padding: 10px;
-    margin-bottom: 20px;
     color: #fff;
 }
 
@@ -15667,6 +15666,7 @@ be a descendant of the grid when it is being dragged.
 
 .app-sidebar__user-name {
     font-size: 17px;
+    text-align: center;
     line-height: 1.3;
 }
 
