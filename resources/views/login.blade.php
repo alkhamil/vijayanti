@@ -22,6 +22,9 @@
         </div>
     @endif
     <section class="login-content">
+        <div class="text-center text-white mb-4">
+            <h1>PT. VIJAYANTI PERSADA</h1>
+        </div>
         <div class="login-box">
             <form class="login-form" action="{{ route('login.proses') }}" method="POST">
                 @csrf

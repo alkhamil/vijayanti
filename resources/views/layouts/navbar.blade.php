@@ -25,25 +25,27 @@
                 <span class="app-menu__label">Dashboard</span>
             </a>
         </li>
-        <li @if($s1 == "kriteria" || $s1 == "dimensi") class="treeview is-expanded" @else class="treeview" @endif>
-            <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-folder"></i>
-                <span class="app-menu__label">Data Master</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a @if($s1 == "kriteria") class="treeview-item active" @else class="treeview-item" @endif href="{{ url('kriteria') }}">
-                        <i class="icon fa fa-circle-o"></i> Input Kriteria
-                    </a>
-                </li>
-                <li>
-                    <a @if($s1 == "dimensi") class="treeview-item active" @else class="treeview-item" @endif href="{{ url('dimensi') }}">
-                        <i class="icon fa fa-circle-o"></i> Input Dimensi
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @if ($auth->role_id == 1)
+            <li @if($s1 == "kriteria" || $s1 == "dimensi") class="treeview is-expanded" @else class="treeview" @endif>
+                <a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-folder"></i>
+                    <span class="app-menu__label">Data Master</span>
+                    <i class="treeview-indicator fa fa-angle-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a @if($s1 == "kriteria") class="treeview-item active" @else class="treeview-item" @endif href="{{ url('kriteria') }}">
+                            <i class="icon fa fa-circle-o"></i> Input Kriteria
+                        </a>
+                    </li>
+                    <li>
+                        <a @if($s1 == "dimensi") class="treeview-item active" @else class="treeview-item" @endif href="{{ url('dimensi') }}">
+                            <i class="icon fa fa-circle-o"></i> Input Dimensi
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
         <li @if($s1 == "kuisioner") class="treeview is-expanded" @else class="treeview" @endif>
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-folder"></i>
