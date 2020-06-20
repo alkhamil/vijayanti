@@ -49,6 +49,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/kriteria/edit', 'KriteriaCtrl@edit')->name('kriteria.edit');
     Route::get('/kriteria/hapus/{id}', 'KriteriaCtrl@hapus')->name('kriteria.hapus');
     
+    Route::get('/survey', 'SurveyCtrl@index')->name('survey.index');
+    Route::get('/survey/{id}', 'SurveyCtrl@survey')->name('survey.survey');
+    Route::post('/survey/create', 'SurveyCtrl@survey_create')->name('survey.create');
+    Route::get('/survey/detail/{id}', 'SurveyCtrl@detail')->name('survey.detail');
+
+    Route::get('/servqual', 'ServqualCtrl@company')->name('servqual.company');
+    Route::get('/servqual/detail/{id}', 'ServqualCtrl@detail')->name('servqual.detail');
+    
     Route::get('/kuisioner', 'KuisionerCtrl@index')->name('kuisioner.index');
 
     Route::get('/logout', 'LoginCtrl@logout')->name('logout');
