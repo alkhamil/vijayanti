@@ -25,6 +25,11 @@
     <!-- The javascript plugin to display page loading on top-->
     <script src="{{ url('assets/js/plugins/pace.min.js') }}"></script>
     <!-- Page specific javascripts-->
+
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="{{ url('assets/js/plugins/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('assets/js/plugins/dataTables.bootstrap.min.js') }}"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
 </body>
 
 </html>
