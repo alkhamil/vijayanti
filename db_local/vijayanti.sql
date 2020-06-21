@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : local_mysql
+ Source Server         : Mysql
  Source Server Type    : MySQL
- Source Server Version : 50730
+ Source Server Version : 100408
  Source Host           : localhost:3306
  Source Schema         : vijayanti
 
  Target Server Type    : MySQL
- Target Server Version : 50730
+ Target Server Version : 100408
  File Encoding         : 65001
 
- Date: 21/06/2020 06:10:01
+ Date: 21/06/2020 20:08:25
 */
 
 SET NAMES utf8mb4;
@@ -23,19 +23,19 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `assignments`;
 CREATE TABLE `assignments`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `checker_id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
   `status` int(1) NULL DEFAULT 0,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of assignments
 -- ----------------------------
-INSERT INTO `assignments` VALUES (1, 3, 7, 1, '2020-06-20 16:09:23', '2020-06-20 19:20:28');
-INSERT INTO `assignments` VALUES (2, 4, 6, 1, '2020-06-20 16:10:31', '2020-06-20 21:21:48');
+INSERT INTO `assignments` VALUES (8, 'SK/1592742334/1', 3, 6, 0, '2020-06-21 12:25:34', '2020-06-21 12:25:34');
 
 -- ----------------------------
 -- Table structure for checkers
@@ -57,9 +57,9 @@ CREATE TABLE `checkers`  (
 -- ----------------------------
 -- Records of checkers
 -- ----------------------------
-INSERT INTO `checkers` VALUES (3, 9, 'NAZMUDIN', '1996-05-31', 'alkhamilnaz@gmail.com', '088781728', 1, '2020-06-20 15:43:20', '2020-06-20 16:09:23');
-INSERT INTO `checkers` VALUES (4, 10, 'ROCHMAN', '1997-09-23', 'rochma@email.com', '081928192', 1, '2020-06-20 16:04:24', '2020-06-20 16:10:31');
-INSERT INTO `checkers` VALUES (5, 11, 'SAMSUDIN', '2020-06-02', 'admin@email.com', '233343434', 0, '2020-06-20 18:25:02', '2020-06-20 18:25:02');
+INSERT INTO `checkers` VALUES (3, 9, 'NAZMUDIN', '1996-05-31', 'alkhamilnaz@gmail.com', '088781728', 1, '2020-06-20 15:43:20', '2020-06-21 12:25:34');
+INSERT INTO `checkers` VALUES (4, 10, 'ROCHMAN', '1997-09-23', 'rochma@email.com', '081928192', 0, '2020-06-20 16:04:24', '2020-06-20 16:10:31');
+INSERT INTO `checkers` VALUES (5, 11, 'SAMSUDIN', '2020-06-02', 'admin@email.com', '233343434', 0, '2020-06-20 18:25:02', '2020-06-21 11:49:49');
 
 -- ----------------------------
 -- Table structure for companies
@@ -83,8 +83,8 @@ CREATE TABLE `companies`  (
 -- ----------------------------
 -- Records of companies
 -- ----------------------------
-INSERT INTO `companies` VALUES (6, 7, 'PT. WIJAYA ABADI', '2016-06-20', '012677267', 'wa@email.com', 'huhuhu', 'Bekasi', 1, '2020-06-20 15:31:52', '2020-06-20 16:10:31');
-INSERT INTO `companies` VALUES (7, 8, 'PT. JAYA ABADI', '2017-05-23', '01277267', 'ja@email.com', 'huhu', 'Bekasi', 1, '2020-06-20 15:42:24', '2020-06-20 16:09:23');
+INSERT INTO `companies` VALUES (6, 7, 'PT. WIJAYA ABADI', '2016-06-20', '012677267', 'wa@email.com', 'huhuhu', 'Bekasi', 1, '2020-06-20 15:31:52', '2020-06-21 12:25:34');
+INSERT INTO `companies` VALUES (7, 8, 'PT. JAYA ABADI', '2017-05-23', '01277267', 'ja@email.com', 'huhu', 'Bekasi', 0, '2020-06-20 15:42:24', '2020-06-21 12:22:06');
 
 -- ----------------------------
 -- Table structure for criterias
@@ -136,6 +136,7 @@ INSERT INTO `dimensions` VALUES (4, 'D2', 'Responsiveness', 'Daya Tanggap', '202
 DROP TABLE IF EXISTS `kuisioners`;
 CREATE TABLE `kuisioners`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `assignment_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
   `criteria_id` int(11) NOT NULL,
@@ -144,29 +145,7 @@ CREATE TABLE `kuisioners`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of kuisioners
--- ----------------------------
-INSERT INTO `kuisioners` VALUES (19, 3, 7, 2, 1, 5, '2020-06-20 19:20:28', '2020-06-20 19:20:28');
-INSERT INTO `kuisioners` VALUES (20, 3, 7, 3, 2, 5, '2020-06-20 19:20:28', '2020-06-20 19:20:28');
-INSERT INTO `kuisioners` VALUES (21, 3, 7, 4, 1, 5, '2020-06-20 19:20:28', '2020-06-20 19:20:28');
-INSERT INTO `kuisioners` VALUES (22, 3, 7, 5, 2, 5, '2020-06-20 19:20:28', '2020-06-20 19:20:28');
-INSERT INTO `kuisioners` VALUES (23, 3, 7, 6, 1, 5, '2020-06-20 19:20:28', '2020-06-20 19:20:28');
-INSERT INTO `kuisioners` VALUES (24, 3, 7, 7, 2, 5, '2020-06-20 19:20:29', '2020-06-20 19:20:29');
-INSERT INTO `kuisioners` VALUES (25, 3, 7, 2, 1, 5, '2020-06-20 20:03:38', '2020-06-20 20:03:38');
-INSERT INTO `kuisioners` VALUES (26, 3, 7, 3, 2, 5, '2020-06-20 20:03:38', '2020-06-20 20:03:38');
-INSERT INTO `kuisioners` VALUES (27, 3, 7, 4, 2, 5, '2020-06-20 20:03:39', '2020-06-20 20:03:39');
-INSERT INTO `kuisioners` VALUES (28, 3, 7, 5, 1, 5, '2020-06-20 20:03:39', '2020-06-20 20:03:39');
-INSERT INTO `kuisioners` VALUES (29, 3, 7, 6, 1, 5, '2020-06-20 20:03:39', '2020-06-20 20:03:39');
-INSERT INTO `kuisioners` VALUES (30, 3, 7, 7, 1, 5, '2020-06-20 20:03:39', '2020-06-20 20:03:39');
-INSERT INTO `kuisioners` VALUES (31, 4, 6, 2, 4, 5, '2020-06-20 21:21:47', '2020-06-20 21:21:47');
-INSERT INTO `kuisioners` VALUES (32, 4, 6, 3, 5, 4, '2020-06-20 21:21:48', '2020-06-20 21:21:48');
-INSERT INTO `kuisioners` VALUES (33, 4, 6, 4, 5, 5, '2020-06-20 21:21:48', '2020-06-20 21:21:48');
-INSERT INTO `kuisioners` VALUES (34, 4, 6, 5, 4, 4, '2020-06-20 21:21:48', '2020-06-20 21:21:48');
-INSERT INTO `kuisioners` VALUES (35, 4, 6, 6, 5, 5, '2020-06-20 21:21:48', '2020-06-20 21:21:48');
-INSERT INTO `kuisioners` VALUES (36, 4, 6, 7, 4, 3, '2020-06-20 21:21:48', '2020-06-20 21:21:48');
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for migrations

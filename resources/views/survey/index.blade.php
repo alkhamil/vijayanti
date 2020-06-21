@@ -3,11 +3,11 @@
 @section('content')
 <div class="app-title">
     <div>
-        <h1>Kriteria</h1>
+        <h1>My Assignment</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item active">Kriteria</li>
+        <li class="breadcrumb-item active">My Assignment</li>
     </ul>
 </div>
 <div class="row">
@@ -24,7 +24,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Kode</th>
+                                <th>No SK</th>
+                                <th>Perusahaan</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -32,10 +33,11 @@
                             @foreach ($assign as $key => $c)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
+                                    <td>{{ $c->code }}</td>
                                     <td>{{ $c->company->name }}</td>
                                     <td class="text-center">
                                         <a href="{{ url('survey/'.$c->id) }}" class="btn btn-info btn-sm">
-                                            <i class="fa fa-edit"></i> seurvey
+                                            <i class="fa fa-edit"></i> Survey
                                         </a>
                                     </td>
                                 </tr>

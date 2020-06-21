@@ -3,11 +3,11 @@
 @section('content')
 <div class="app-title">
     <div>
-        <h1>Perusahaan</h1>
+        <h1>Perhitungan Servqual</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item active">Perusahaan</li>
+        <li class="breadcrumb-item active">Perhitungan Servqual</li>
     </ul>
 </div>
 <div class="row">

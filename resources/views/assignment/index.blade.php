@@ -27,40 +27,69 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nama Checker</th>
-                                <th>Bertugas Ke</th>
+                                <th>No SK</th>
+                                <th>Checker</th>
+                                <th>Perusahaan</th>
+                                <th>Status</th>
+                                <th>Tanggal Bertugas</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($assignments as $key => $a)
+                                @php
+                                    $checker = \App\Checker::where('id', $a->checker_id)->first();
+                                    if ($checker) {
+                                        $checkerName = $checker->name;
+                                    }
+                                    $company = \App\Company::where('id', $a->company_id)->first();
+                                    if ($company) {
+                                        $companyName = $company->name;
+                                    }
+                                @endphp
                                 <tr>
                                     <td>{{ $key+1 }}</td>
-                                    <td>{{ \App\Checker::where('id', $a->checker_id)->first()->name }}</td>
-                                    <td>{{ \App\Company::where('id', $a->company_id)->first()->name }}</td>
+                                    <td>{{ $a->code }}</td>
+                                    <td>{{ $checkerName }}</td>
+                                    <td>{{ $companyName }}</td>
                                     <td>
-                                        <button data-toggle="modal" data-target="#haspu-assignment{{ $a->id }}" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-trash"></i> Hapus
-                                        </button>
+                                        @if ($a->status == 0)
+                                            <div class="badge badge-warning">Belum Selesai</div>
+                                        @else
+                                            <div class="badge badge-success">Selesai</div>
+                                        @endif
+                                    </td>
+                                    <td>{{ date('d/m/Y', strtotime($a->created_at)) }}</td>
+                                    <td>
+                                        @if ($a->status == 0)
+                                            @php
+                                                $kuis = \App\Kuisioner::where('assignment_code', $a->code)->get()->count();
+                                            @endphp    
+                                            <button @if($kuis <= 0) disabled style="cursor: not-allowed" title="Belum dikerjakan" @endif data-toggle="modal" data-target="#done-assigment{{ $a->id }}" class="btn btn-success btn-sm">
+                                                <i class="fa fa-check"></i> Selesai
+                                            </button>
+                                        @else 
+                                            -
+                                        @endif
                                     </td>
                                 </tr>
 
                                 <!-- Modal hapus -->
-                                <div class="modal fade" id="haspu-assignment{{ $a->id }}" tabindex="-1" role="dialog" aria-labelledby="tambah-assignmentLabel" aria-hidden="true">
+                                <div class="modal fade" id="done-assigment{{ $a->id }}" tabindex="-1" role="dialog" aria-labelledby="tambah-assignmentLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header bg-primary text-white">
-                                            <h5 class="modal-title" id="tambah-assignmentLabel">Hapus Perusahaan</h5>
+                                            <h5 class="modal-title" id="tambah-assignmentLabel">Selesai kan tugas</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true" class="text-white">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <h4>Apakah anda yakin ingin <br> menghapus data ini ?</h4>
+                                            <h5>Apakah tugas ini sudah yakin selesai ?</h5>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            {{-- <a href="{{ route('assignment.hapus', $a->id) }}" class="btn btn-primary">Hapus</a> --}}
+                                            <a href="{{ route('assignment.done', $a->id) }}" class="btn btn-primary">Ya, Selesai</a>
                                         </div>
                                         </div>
                                     </div>

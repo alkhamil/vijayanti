@@ -6,7 +6,7 @@
       <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h2 class="text-center">Survey Kepuasan Pelanggan</h2>
+                <h2 class="text-center">Penilaian Beberapa Aspek</h2>
                 <h5 class="text-center">{{ $company->company->name }}</h5>
             </div>
             <div class="card-body">
@@ -17,11 +17,11 @@
                         <input type="hidden" name="assign_id" value="{{$company->id}}">
                         <div class="col-sm-12">
                             <div class="pb-2 mt-2 mb-2">
-                                <span class="badge badge-info">1</span> <small class="">Sangat Tidak Penting</small>
-                                <span class="badge badge-info">2</span> <small class="">Tidak Penting</small>
-                                <span class="badge badge-info">3</span> <small class="">Netral</small>
-                                <span class="badge badge-info">4</span> <small class="">Penting</small>
-                                <span class="badge badge-info">5</span> <small class="">Sangat Penting</small>
+                                <span class="badge badge-info">1</span> <small class=""><b>SB</b>: Sangat Baik</small>
+                                <span class="badge badge-info">2</span> <small class=""><b>B</b>: Baik</small>
+                                <span class="badge badge-info">3</span> <small class=""><b>CB</b>: Cukup Baik</small>
+                                <span class="badge badge-info">4</span> <small class=""><b>KB</b>: Kurang Baik</small>
+                                <span class="badge badge-info">5</span> <small class=""><b>SKB</b>: Sangat Kurang Baik</small>
                             </div>
                             <table class="table table-bordered">
                                 <thead class="bg-light">

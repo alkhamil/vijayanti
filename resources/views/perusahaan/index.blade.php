@@ -32,7 +32,6 @@
                                 <th>Wilayah</th>
                                 <th>Telepon</th>
                                 <th>Alamat</th>
-                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -45,13 +44,6 @@
                                     <td>{{ $c->region }}</td>
                                     <td>{{ $c->phone }}</td>
                                     <td>{{ $c->address }}</td>
-                                    <td>
-                                        @if ($c->status == 1)
-                                            <div class="badge badge-primary">Sedang dipantau</div>
-                                        @else 
-                                            <div class="badge badge-danger">Sedang tidak dipantau</div>
-                                        @endif
-                                    </td>
                                     <td>
                                         <button data-toggle="modal" data-target="#edit-perusahaan{{ $c->id }}" class="btn btn-info btn-sm">
                                             <i class="fa fa-edit"></i> Edit
@@ -146,11 +138,23 @@
                                         <div class="modal-body">
                                             @php
                                                 $user = \App\User::where('id', $c->user_id)->first();
-                                                $bt = explode('-',$c->date_standing);
-                                                $password = $bt[2].$bt[1].$bt[0];
                                             @endphp
-                                            <b>Username : {{ $user->username }}</b><br>
-                                            <b>Password : {{ $password }}</b>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    USERNAME
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <b>: {{ $user->username }}</b>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    PASSWORD
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <b>: {{ $user->username }}</b>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

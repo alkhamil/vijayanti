@@ -19,7 +19,11 @@ class AssignmentCtrl extends Controller
 
     public function tambah(Request $request)
     {
+        $assignmentExt = Assignment::all()->count();
+        $assignmentExt++;
+        $codeAssignment = 'SK/'.time().'/'.$assignmentExt;
         $assignment = new Assignment;
+        $assignment->code = $codeAssignment;
         $assignment->checker_id = $request->checker_id;
         $assignment->company_id = $request->company_id;
         if ($assignment->save()) {
@@ -31,6 +35,24 @@ class AssignmentCtrl extends Controller
             $company->status = 1; // sedang dipantau
             $company->save();
             return redirect('assignment')->with('msg', 'Data assignment berhasil dibuat!');
+        }
+    }
+
+    public function done(Request $request, $id)
+    {
+        $assignment = Assignment::where('id', $id)->first();
+        if ($assignment !== null) {
+            $assignment->status = 1;
+            if ($assignment->save()) {
+                $checker = Checker::where('id', $assignment->checker_id)->first();
+                $checker->status = 0;
+                $checker->save();
+
+                $company = Company::where('id', $assignment->company_id)->first();
+                $company->status = 0;
+                $company->save();
+            }
+            return redirect('assignment')->with('msg', 'Tugas '.$assignment->code.' Selesai');
         }
     }
 }
