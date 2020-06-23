@@ -75,6 +75,13 @@
                     <span class="app-menu__label">My Assignment</span>
                 </a>
             </li>
+        @elseif ($auth->role_id == 3)
+            <li>
+                <a @if($s1 == "result") class="app-menu__item active" @else class="app-menu__item" @endif href="{{ url('result') }}">
+                    <i class="app-menu__icon fa fa-file"></i>
+                    <span class="app-menu__label">Result</span>
+                </a>
+            </li>
         @endif
     </ul>
 </aside>

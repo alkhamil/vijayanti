@@ -54,6 +54,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/survey/create', 'SurveyCtrl@survey_create')->name('survey.create');
     Route::get('/survey/detail/{id}', 'SurveyCtrl@detail')->name('survey.detail');
 
+    Route::get('/result', 'ResultCtrl@index')->name('result.index');
+
     Route::get('/servqual', 'ServqualCtrl@company')->name('servqual.company');
     Route::get('/servqual/detail/{id}', 'ServqualCtrl@detail')->name('servqual.detail');
     

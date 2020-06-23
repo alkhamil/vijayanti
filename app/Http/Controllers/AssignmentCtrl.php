@@ -19,6 +19,7 @@ class AssignmentCtrl extends Controller
 
     public function tambah(Request $request)
     {
+        dd($request->all());
         $assignmentExt = Assignment::all()->count();
         $assignmentExt++;
         $codeAssignment = 'SK/'.time().'/'.$assignmentExt;

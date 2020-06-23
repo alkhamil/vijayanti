@@ -31,7 +31,7 @@
                                 <th>Checker</th>
                                 <th>Perusahaan</th>
                                 <th>Status</th>
-                                <th>Tanggal Bertugas</th>
+                                <th>Periode</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -116,22 +116,46 @@
     <form action="{{ route('assignment.tambah') }}" method="POST">
         @csrf
         <div class="modal-body">
-           <div class="form-group">
-               <label>Pilih Checker</label>
-               <select name="checker_id" class="form-control">
-                   @foreach ($checkers as $ck)
-                       <option value="{{ $ck->id }}">{{ $ck->name }}</option>
-                   @endforeach
-               </select>
-           </div>
-           <div class="form-group">
-               <label>Pilih Perusahaan</label>
-               <select name="company_id" class="form-control">
-                   @foreach ($companies as $cm)
-                       <option value="{{ $cm->id }}">{{ $cm->name }}</option>
-                   @endforeach
-               </select>
-           </div>
+            <div class="row no-gutters">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Tanggal Mulai Periode</label>
+                        <input type="text" id="date_start" name="date_start" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Lama</label>
+                        <select id="select-lama" name="lama" class="form-control" disabled="disabled">
+                            @for($i=1; $i<13; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Tanggal Selesai Periode</label>
+                        <input type="text" id="date_end" name="date_end" class="form-control" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Pilih Checker</label>
+                <select name="checker_id" class="form-control">
+                    @foreach ($checkers as $ck)
+                        <option value="{{ $ck->id }}">{{ $ck->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Pilih Perusahaan</label>
+                <select name="company_id" class="form-control">
+                    @foreach ($companies as $cm)
+                        <option value="{{ $cm->id }}">{{ $cm->name }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -144,5 +168,46 @@
 @endsection
 
 @section('script')
-    
+    <script>
+        var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+        $('#date_start').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'dd mmm yyyy',
+            iconsLibrary: 'fontawesome',
+            minDate: today,
+            close: function(){
+                $('#select-lama').removeAttr('disabled');
+                var lamaa = $('#select-lama').val();
+                changeDate(parseInt(lamaa))
+            }
+        });
+
+        $('#select-lama').on('change', function(){
+            var lama = $(this).val();
+            changeDate(parseInt(lama))
+        });
+
+        function changeDate(qty){
+            let currentDate = new Date($('#date_start').val());
+            let newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + qty, currentDate.getDate());
+            let month =new Date(currentDate.getFullYear(), currentDate.getMonth() + (qty + 1), 0);
+            if(newDate.getMonth() != month.getMonth()){
+                newDate = month;
+            }
+            $('#date_end').attr('value', dateFormat(newDate))
+        }
+
+        function nol(x){
+            const y = (x>9)?(x>99)?x:''+x:'0'+x;
+            return y;
+        }
+
+        function dateFormat(date){
+            const bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            const dates = date.getDate();
+            return nol(dates) + ' ' + bulan[month] + ' ' + year;
+        }
+    </script>
 @endsection

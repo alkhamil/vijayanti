@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/main.css') }}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    
 </head>
 
 <body class="app sidebar-mini">
@@ -19,6 +21,8 @@
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="{{ url('assets/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <script src="{{ url('assets/js/popper.min.js') }}"></script>
     <script src="{{ url('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ url('assets/js/main.js') }}"></script>
@@ -30,6 +34,7 @@
     <script type="text/javascript" src="{{ url('assets/js/plugins/jquery.dataTables.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/plugins/dataTables.bootstrap.min.js') }}"></script>
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    @yield('script')
 </body>
 
 </html>
