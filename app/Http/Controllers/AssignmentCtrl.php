@@ -11,20 +11,22 @@ class AssignmentCtrl extends Controller
 {
     public function index()
     {
-        $assignments = Assignment::all();
+        $assignments = Assignment::with(['checker', 'company'])->get();
         $companies = Company::where('status', 0)->get();
         $checkers = Checker::where('status', 0)->get();
         return view('assignment.index', compact('assignments', 'companies', 'checkers'));
     }
 
     public function tambah(Request $request)
-    {
-        dd($request->all());
+    {   
+        $periode = explode('-', $request->periode);
         $assignmentExt = Assignment::all()->count();
         $assignmentExt++;
         $codeAssignment = 'SK/'.time().'/'.$assignmentExt;
         $assignment = new Assignment;
         $assignment->code = $codeAssignment;
+        $assignment->bulan = $periode[0];
+        $assignment->tahun = $periode[1];
         $assignment->checker_id = $request->checker_id;
         $assignment->company_id = $request->company_id;
         if ($assignment->save()) {

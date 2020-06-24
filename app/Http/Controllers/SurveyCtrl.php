@@ -38,12 +38,12 @@ class SurveyCtrl extends Controller
         $user = Checker::where('user_id', $auth->id)->first();
 
         $assign = Assignment::where('id', $request->assign_id)->first();
-        $assign->status = 1;
+        // $assign->status = 1;
         if ($assign->save()) {
             foreach($criteria as $data){
                 $kuisioner = new Kuisioner;
                 $kuisioner->user_id = $user->id;
-                $kuisioner->assignment_code = $assign->code;
+                $kuisioner->assignment_code = $assign->id;
                 $kuisioner->company_id = $request->company_id;
                 $kuisioner->criteria_id = $data->id;
                 $kuisioner->kenyataan = empty($request->k[$data->id]) ? 0 : $request->k[$data->id];

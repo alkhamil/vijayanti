@@ -9,4 +9,8 @@ class Assignment extends Model
     public function company(){
         return $this->belongsTo(Company::class, 'company_id');
     }
+
+    public function checker(){
+        return $this->belongsTo(Checker::class, 'checker_id');
+    }
 }

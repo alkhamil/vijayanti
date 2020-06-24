@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/servqual', 'ServqualCtrl@company')->name('servqual.company');
     Route::get('/servqual/detail/{id}', 'ServqualCtrl@detail')->name('servqual.detail');
+    Route::get('/servqual/nilai/{id}', 'ServqualCtrl@nilai')->name('servqual.nilai');
     
     Route::get('/kuisioner', 'KuisionerCtrl@index')->name('kuisioner.index');
 

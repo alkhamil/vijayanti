@@ -14,10 +14,16 @@ class Kuisioner extends Model
         return $this->belongsTo(Company::class, 'company_id');
     }
 
-    public function getKriteria($company_id)
+    public function getKriteria($id, $type)
     {
-        $k =  Kuisioner::where('company_id', $company_id)->get();
-        $c =  Criteria::all();
+        if($type == 'all'){
+            $k =  Kuisioner::where('company_id', $id)->get();
+            $c =  Criteria::all();
+        }
+        if($type == 'periode'){
+            $k =  Kuisioner::where('assignment_code', $id)->get();
+            $c =  Criteria::all();
+        }
         
         if(count($k)){
             foreach($k as $data)
@@ -37,9 +43,9 @@ class Kuisioner extends Model
         return $hasil;
     }
 
-    public function servqual($id)
+    public function servqual($id, $type)
     {
-        $data = $this->getKriteria($id);
+        $data = $this->getKriteria($id, $type);
         
         foreach($data['kenyataan'] as $key => $db)
         {
@@ -52,9 +58,9 @@ class Kuisioner extends Model
         return $hasil;
     }
 
-    public function dimensiNilai()
+    public function dimensiNilai($id, $type)
     {   
-        $kriteria = $this->servqual();
+        $kriteria = $this->servqual($id, $type);
         $dimensi = Dimension::with(['criteria'])->get();
 
         foreach($dimensi as $data)
@@ -65,18 +71,31 @@ class Kuisioner extends Model
             $rataH = 0;
             foreach($data->criteria as $dt)
             {
-                $bobotK += $kriteria['bobotkenyataan'][$dt->id]; 
                 $rataK += $kriteria['ratakenyataan'][$dt->id]; 
-                $bobotH += $kriteria['bobotharapan'][$dt->id]; 
                 $rataH += $kriteria['rataharapan'][$dt->id]; 
 
-                $hasil['bobotkenyataan'][$data->id] = $bobotK;   
-                $hasil['ratakenyataan'][$data->id] = $rataK;   
-                $hasil['bobotharapan'][$data->id] = $bobotH;   
-                $hasil['rataharapan'][$data->id] = $rataH;   
+                $hasil['bobotkenyataan'][$data->id] = $rataK;   
+                $hasil['ratakenyataan'][$data->id] = number_format($rataK/ count($data->criteria), 2);   
+                $hasil['bobotharapan'][$data->id] = $rataH;   
+                $hasil['rataharapan'][$data->id] = number_format($rataH/ count($data->criteria), 2);   
             }
         }
 
         return $hasil;
+    }
+
+    public function keterangan($a)
+    {
+        if($a < 0){
+            $ket = 'Tidak puas';
+        }
+        if($a == 0){
+            $ket = 'Cukup puas ';
+        }
+        if($a > 0){
+            $ket = 'Sangat puas';
+        }
+
+        return $ket;
     }
 }

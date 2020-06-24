@@ -36,9 +36,17 @@
                                     <td>{{ $c->code }}</td>
                                     <td>{{ $c->company->name }}</td>
                                     <td class="text-center">
+                                        @php
+                                            $kuis = \App\Kuisioner::where('assignment_code', $c->id)->get()->count();
+                                        @endphp
+                                        @if($kuis <= 0)
                                         <a href="{{ url('survey/'.$c->id) }}" class="btn btn-info btn-sm">
                                             <i class="fa fa-edit"></i> Survey
                                         </a>
+                                        @endif
+                                        @if ($kuis > 0)
+                                            <i class="fa fa-check text-success"></i> selesai
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

@@ -3,18 +3,18 @@
 @section('content')
 <div class="app-title">
     <div>
-        <h1>Result</h1>
+        <h1>Perhitungan Servqual</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item active">Result</li>
+        <li class="breadcrumb-item active">Perhitungan Servqual </li>
     </ul>
 </div>
 <div class="row">
     <div class="col-md-12">
         <div class="tile">
             <div class="tile-body">
-                <span class="d-block p-2 bg-primary text-white">Perhitungan semua berdasarkan pernyataan</span>
+                <span class="d-block p-2 bg-primary text-white">Nilai Rata - Rata Gap 5 berdasarkan pertanyaan</span>
                 <br>
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -51,6 +51,7 @@
                         </tbody>
                     </table>
                 </div>
+                
                 <span class="d-block p-2 bg-primary text-white">Nilai Rata - Rata Gap 5 berdasarkan dimensi</span>
                 <br>
                 <div class="table-responsive">
@@ -92,7 +93,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div> 
+                </div>
             </div>
         </div>
     </div>

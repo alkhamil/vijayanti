@@ -37,21 +37,11 @@
                         </thead>
                         <tbody>
                             @foreach ($assignments as $key => $a)
-                                @php
-                                    $checker = \App\Checker::where('id', $a->checker_id)->first();
-                                    if ($checker) {
-                                        $checkerName = $checker->name;
-                                    }
-                                    $company = \App\Company::where('id', $a->company_id)->first();
-                                    if ($company) {
-                                        $companyName = $company->name;
-                                    }
-                                @endphp
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $a->code }}</td>
-                                    <td>{{ $checkerName }}</td>
-                                    <td>{{ $companyName }}</td>
+                                    <td>{{ $a->checker->name }}</td>
+                                    <td>{{ $a->company->name }}</td>
                                     <td>
                                         @if ($a->status == 0)
                                             <div class="badge badge-warning">Belum Selesai</div>
@@ -59,11 +49,11 @@
                                             <div class="badge badge-success">Selesai</div>
                                         @endif
                                     </td>
-                                    <td>{{ date('d/m/Y', strtotime($a->created_at)) }}</td>
+                                    <td class="text-center">{{ $a->bulan }}/{{ $a->tahun }}</td>
                                     <td>
                                         @if ($a->status == 0)
                                             @php
-                                                $kuis = \App\Kuisioner::where('assignment_code', $a->code)->get()->count();
+                                                $kuis = \App\Kuisioner::where('assignment_code', $a->id)->get()->count();
                                             @endphp    
                                             <button @if($kuis <= 0) disabled style="cursor: not-allowed" title="Belum dikerjakan" @endif data-toggle="modal" data-target="#done-assigment{{ $a->id }}" class="btn btn-success btn-sm">
                                                 <i class="fa fa-check"></i> Selesai
@@ -120,23 +110,7 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Tanggal Mulai Periode</label>
-                        <input type="text" id="date_start" name="date_start" class="form-control" required>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label>Lama</label>
-                        <select id="select-lama" name="lama" class="form-control" disabled="disabled">
-                            @for($i=1; $i<13; $i++)
-                                <option value="{{ $i }}">{{ $i }}</option>
-                            @endfor
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label>Tanggal Selesai Periode</label>
-                        <input type="text" id="date_end" name="date_end" class="form-control" readonly>
+                        <input name="periode" class="datepicker" class="form-control" data-date-format="mm/dd/yyyy">
                     </div>
                 </div>
             </div>
@@ -169,45 +143,13 @@
 
 @section('script')
     <script>
-        var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-        $('#date_start').datepicker({
-            uiLibrary: 'bootstrap4',
-            format: 'dd mmm yyyy',
-            iconsLibrary: 'fontawesome',
-            minDate: today,
-            close: function(){
-                $('#select-lama').removeAttr('disabled');
-                var lamaa = $('#select-lama').val();
-                changeDate(parseInt(lamaa))
-            }
+        $('.datepicker').datepicker({
+            format: "mm-yyyy",
+            viewMode: "months",
+            endDate : (new Date('mm-yyyy') + '-01'),
+            minViewMode: "months",
+            startDate: '-3d',
+            autoclose: true
         });
-
-        $('#select-lama').on('change', function(){
-            var lama = $(this).val();
-            changeDate(parseInt(lama))
-        });
-
-        function changeDate(qty){
-            let currentDate = new Date($('#date_start').val());
-            let newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + qty, currentDate.getDate());
-            let month =new Date(currentDate.getFullYear(), currentDate.getMonth() + (qty + 1), 0);
-            if(newDate.getMonth() != month.getMonth()){
-                newDate = month;
-            }
-            $('#date_end').attr('value', dateFormat(newDate))
-        }
-
-        function nol(x){
-            const y = (x>9)?(x>99)?x:''+x:'0'+x;
-            return y;
-        }
-
-        function dateFormat(date){
-            const bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const year = date.getFullYear();
-            const month = date.getMonth();
-            const dates = date.getDate();
-            return nol(dates) + ' ' + bulan[month] + ' ' + year;
-        }
     </script>
 @endsection

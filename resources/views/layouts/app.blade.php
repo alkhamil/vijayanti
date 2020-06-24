@@ -21,8 +21,8 @@
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="{{ url('assets/js/jquery-3.3.1.min.js') }}"></script>
-    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
     <script src="{{ url('assets/js/popper.min.js') }}"></script>
     <script src="{{ url('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ url('assets/js/main.js') }}"></script>
