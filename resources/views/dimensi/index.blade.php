@@ -131,7 +131,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Kode Dimensi</label>
-                    <input type="text" name="code" class="form-control" required>
+                    <input type="text" name="code" class="form-control" value="D{{ count($dimensions)+1 }}" readonly>
                 </div>
                 <div class="form-group">
                     <label>Nama Dimensi</label>

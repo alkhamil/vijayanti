@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-md-12">
         <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#tambah-assignment">
-            <i class="fa fa-plus"></i> Tambah Assigment
+            <i class="fa fa-plus"></i> Tambah Assignment
         </button>
         @if (Session::has('msg'))
             <div class="alert alert-success mb-2">
@@ -58,16 +58,19 @@
                                     <td>
                                         @if ($a->status == 0)
                                             @if (count($a->kuisioner) > 0)
-                                                <button data-toggle="modal" data-target="#done-assigment{{ $a->id }}" class="btn btn-success btn-sm">
+                                                <button data-toggle="modal" data-target="#done-assignment{{ $a->id }}" class="btn btn-success btn-sm">
                                                     <i class="fa fa-check"></i> Selesai
                                                 </button>
                                             @endif
                                         @endif
+                                        <button data-toggle="modal" data-target="#hapus-assignment{{ $a->id }}" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-trash"></i> Hapus
+                                        </button>
                                     </td>
                                 </tr>
 
-                                <!-- Modal hapus -->
-                                <div class="modal fade" id="done-assigment{{ $a->id }}" tabindex="-1" role="dialog" aria-labelledby="tambah-assignmentLabel" aria-hidden="true">
+                                <!-- Modal done -->
+                                <div class="modal fade" id="done-assignment{{ $a->id }}" tabindex="-1" role="dialog" aria-labelledby="tambah-assignmentLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header bg-primary text-white">
@@ -77,11 +80,34 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <h5>Apakah tugas ini sudah yakin selesai ?</h5>
+                                            <h5>Apakah tugas ini sudah selesai ?</h5>
+                                            <b>Proses ini sekaligus akan mengirimkan hasil survey ke email {{ $a->company->name }}</b>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <a href="{{ route('assignment.done', $a->id) }}" class="btn btn-primary">Ya, Selesai</a>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal hapus -->
+                                <div class="modal fade" id="hapus-assignment{{ $a->id }}" tabindex="-1" role="dialog" aria-labelledby="tambah-assignmentLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header bg-primary text-white">
+                                            <h5 class="modal-title" id="tambah-assignmentLabel">Hapus Tugas ?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true" class="text-white">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h5>Apakah anda yakin ingin menghapus ini ?</h5>
+                                            <b>Proses ini sekaligus akan menghapus hasil survey terhadap {{ $a->company->name }}</b>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a href="{{ route('assignment.hapus', $a->id) }}" class="btn btn-primary">Ya, Hapus</a>
                                         </div>
                                         </div>
                                     </div>

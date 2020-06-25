@@ -39,12 +39,7 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $c->code }}</td>
                                     <td>{{ $c->content }}</td>
-                                    <td>
-                                        @php
-                                            $dimension_code = \App\Dimension::where('id', $c->dimension_id)->first()->code;
-                                        @endphp
-                                        {{ $dimension_code }}
-                                    </td>
+                                    <td>{{ $c->dimensi->code }}</td>
                                     <td>
                                         <button data-toggle="modal" data-target="#edit-kriteria{{ $c->id }}" class="btn btn-info btn-sm">
                                             <i class="fa fa-edit"></i> Edit
@@ -140,7 +135,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Kode Kriteria</label>
-                    <input type="text" name="code" class="form-control" required>
+                    <input type="text" name="code" class="form-control" value="K{{ count($criterias)+1 }}" readonly>
                 </div>
                 <div class="form-group">
                     <label>Isi Kriteria</label>
@@ -148,9 +143,9 @@
                 </div>
                 <div class="form-group">
                     <label>Kode Dimensi</label>
-                    <select name="dimension_id" id="select2" style="width: 100%" class="form-control">
+                    <select name="dimension_id" id="select2" style="width: 100%" class="form-control" required>
                         @foreach ($dimensions as $d)
-                            <option value="{{ $d->id }}">{{ $d->code }}</option>
+                            <option value="{{ $d->id }}">{{ $d->code }} ( {{ $d->name }} )</option>
                         @endforeach
                     </select>
                 </div>
