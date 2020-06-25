@@ -74,8 +74,14 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="form-group ml-3">
-                            <input type="submit" class="btn btn-success" >
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label><strong>Saran / Komentar</strong></label>
+                                <textarea name="saran" class="form-control" cols="10" rows="5" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-success" >
+                            </div>
                         </div>
                     </form>
                 </div>

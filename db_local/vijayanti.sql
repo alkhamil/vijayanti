@@ -11,7 +11,7 @@
  Target Server Version : 100408
  File Encoding         : 65001
 
- Date: 25/06/2020 17:09:41
+ Date: 25/06/2020 23:16:54
 */
 
 SET NAMES utf8mb4;
@@ -29,18 +29,24 @@ CREATE TABLE `assignments`  (
   `bulan` int(11) NOT NULL,
   `tahun` int(11) NULL DEFAULT NULL,
   `status` int(1) NULL DEFAULT 0,
+  `saran` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of assignments
 -- ----------------------------
-INSERT INTO `assignments` VALUES (13, 'SK/1593059034/1', 6, 9, 6, 2020, 1, '2020-06-25 04:23:54', '2020-06-25 04:26:20');
-INSERT INTO `assignments` VALUES (15, 'SK/1593060339/2', 7, 9, 6, 2020, 1, '2020-06-25 04:45:39', '2020-06-25 04:55:38');
-INSERT INTO `assignments` VALUES (16, 'SK/1593070913/3', 6, 10, 6, 2020, 1, '2020-06-25 07:41:53', '2020-06-25 09:02:19');
-INSERT INTO `assignments` VALUES (17, 'SK/1593075921/4', 6, 11, 6, 2020, 1, '2020-06-25 09:05:21', '2020-06-25 09:06:25');
+INSERT INTO `assignments` VALUES (13, 'SK/1593059034/1', 6, 9, 6, 2020, 1, NULL, '2020-06-25 04:23:54', '2020-06-25 04:26:20');
+INSERT INTO `assignments` VALUES (15, 'SK/1593060339/2', 7, 9, 6, 2020, 1, NULL, '2020-06-25 04:45:39', '2020-06-25 04:55:38');
+INSERT INTO `assignments` VALUES (16, 'SK/1593070913/3', 6, 10, 6, 2020, 1, NULL, '2020-06-25 07:41:53', '2020-06-25 09:02:19');
+INSERT INTO `assignments` VALUES (17, 'SK/1593075921/4', 6, 11, 6, 2020, 1, NULL, '2020-06-25 09:05:21', '2020-06-25 09:06:25');
+INSERT INTO `assignments` VALUES (18, 'SK/1593080768/5', 7, 11, 6, 2020, 1, NULL, '2020-06-25 10:26:08', '2020-06-25 10:28:32');
+INSERT INTO `assignments` VALUES (19, 'SK/1593081025/6', 8, 9, 6, 2020, 1, NULL, '2020-06-25 10:30:25', '2020-06-25 10:31:34');
+INSERT INTO `assignments` VALUES (20, 'SK/1593081227/7', 8, 10, 6, 2020, 1, NULL, '2020-06-25 10:33:47', '2020-06-25 10:39:32');
+INSERT INTO `assignments` VALUES (21, 'SK/1593097469/8', 9, 10, 6, 2020, 1, 'HAHAHAHA', '2020-06-25 15:04:29', '2020-06-25 15:17:33');
+INSERT INTO `assignments` VALUES (22, 'SK/1593100095/9', 10, 9, 6, 2020, 0, NULL, '2020-06-25 15:48:15', '2020-06-25 15:48:15');
 
 -- ----------------------------
 -- Table structure for checkers
@@ -57,13 +63,16 @@ CREATE TABLE `checkers`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of checkers
 -- ----------------------------
 INSERT INTO `checkers` VALUES (6, 12, 'FADLI', '1996-05-31', 'fadli@email.com', '081266277367', 0, '2020-06-25 03:31:00', '2020-06-25 09:06:25');
-INSERT INTO `checkers` VALUES (7, 13, 'RANDI', '1998-12-20', 'randi@email.com', '02188278378', 0, '2020-06-25 04:19:32', '2020-06-25 04:55:38');
+INSERT INTO `checkers` VALUES (7, 13, 'RANDI', '1998-12-20', 'randi@email.com', '02188278378', 0, '2020-06-25 04:19:32', '2020-06-25 10:28:32');
+INSERT INTO `checkers` VALUES (8, 14, 'RAKA', '1994-05-21', 'vuser129@gmail.com', '01212121', 0, '2020-06-25 10:30:07', '2020-06-25 10:39:32');
+INSERT INTO `checkers` VALUES (9, 15, 'ROCHMAN', '1998-09-23', 'rochman@email.com', '012313141', 0, '2020-06-25 15:02:55', '2020-06-25 15:17:33');
+INSERT INTO `checkers` VALUES (10, 16, 'AAN', '1998-05-23', 'naz@email.com', '8918291', 1, '2020-06-25 15:47:58', '2020-06-25 15:48:15');
 
 -- ----------------------------
 -- Table structure for companies
@@ -85,9 +94,9 @@ CREATE TABLE `companies`  (
 -- ----------------------------
 -- Records of companies
 -- ----------------------------
-INSERT INTO `companies` VALUES (9, 'PT. MAILMO SEJAHTERA', '02177782787', 'bintang.aksesoris2020@gmail.com', 'Jalan raya bekasi', 'Bekasi', 0, '2020-06-25 03:29:33', '2020-06-25 04:55:38');
-INSERT INTO `companies` VALUES (10, 'PT. RAKSANA', '02178387879', 'alkhamilnaz@gmail.com', 'Cibeber', 'Bekasi', 0, '2020-06-25 07:41:42', '2020-06-25 09:02:19');
-INSERT INTO `companies` VALUES (11, 'PT. RAGABUANA', '02188378378', 'irhamfad12@gmail.com', 'Bekasi', 'Bekasi', 0, '2020-06-25 09:05:04', '2020-06-25 09:06:25');
+INSERT INTO `companies` VALUES (9, 'PT. MAILMO SEJAHTERA', '02177782787', 'bintang.aksesoris2020@gmail.com', 'Jalan raya bekasi', 'Bekasi', 1, '2020-06-25 03:29:33', '2020-06-25 15:48:15');
+INSERT INTO `companies` VALUES (10, 'PT. RAKSANA', '02178387879', 'alkhamilnaz@gmail.com', 'Cibeber', 'Bekasi', 0, '2020-06-25 07:41:42', '2020-06-25 15:17:33');
+INSERT INTO `companies` VALUES (11, 'PT. RAGABUANA', '02188378378', 'irhamfad12@gmail.com', 'Bekasi', 'Bekasi', 0, '2020-06-25 09:05:04', '2020-06-25 10:28:32');
 
 -- ----------------------------
 -- Table structure for criterias
@@ -148,7 +157,7 @@ CREATE TABLE `kuisioners`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 97 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 121 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of kuisioners
@@ -177,6 +186,30 @@ INSERT INTO `kuisioners` VALUES (93, '17', 6, 11, 4, 4, 5, '2020-06-25 09:06:03'
 INSERT INTO `kuisioners` VALUES (94, '17', 6, 11, 5, 4, 5, '2020-06-25 09:06:03', '2020-06-25 09:06:03');
 INSERT INTO `kuisioners` VALUES (95, '17', 6, 11, 6, 5, 4, '2020-06-25 09:06:03', '2020-06-25 09:06:03');
 INSERT INTO `kuisioners` VALUES (96, '17', 6, 11, 7, 5, 4, '2020-06-25 09:06:03', '2020-06-25 09:06:03');
+INSERT INTO `kuisioners` VALUES (97, '18', 7, 11, 2, 5, 5, '2020-06-25 10:27:03', '2020-06-25 10:27:03');
+INSERT INTO `kuisioners` VALUES (98, '18', 7, 11, 3, 5, 5, '2020-06-25 10:27:03', '2020-06-25 10:27:03');
+INSERT INTO `kuisioners` VALUES (99, '18', 7, 11, 4, 5, 5, '2020-06-25 10:27:03', '2020-06-25 10:27:03');
+INSERT INTO `kuisioners` VALUES (100, '18', 7, 11, 5, 5, 5, '2020-06-25 10:27:03', '2020-06-25 10:27:03');
+INSERT INTO `kuisioners` VALUES (101, '18', 7, 11, 6, 4, 4, '2020-06-25 10:27:03', '2020-06-25 10:27:03');
+INSERT INTO `kuisioners` VALUES (102, '18', 7, 11, 7, 4, 3, '2020-06-25 10:27:03', '2020-06-25 10:27:03');
+INSERT INTO `kuisioners` VALUES (103, '19', 8, 9, 2, 5, 4, '2020-06-25 10:31:08', '2020-06-25 10:31:08');
+INSERT INTO `kuisioners` VALUES (104, '19', 8, 9, 3, 5, 4, '2020-06-25 10:31:08', '2020-06-25 10:31:08');
+INSERT INTO `kuisioners` VALUES (105, '19', 8, 9, 4, 5, 4, '2020-06-25 10:31:08', '2020-06-25 10:31:08');
+INSERT INTO `kuisioners` VALUES (106, '19', 8, 9, 5, 5, 4, '2020-06-25 10:31:08', '2020-06-25 10:31:08');
+INSERT INTO `kuisioners` VALUES (107, '19', 8, 9, 6, 4, 4, '2020-06-25 10:31:08', '2020-06-25 10:31:08');
+INSERT INTO `kuisioners` VALUES (108, '19', 8, 9, 7, 4, 4, '2020-06-25 10:31:08', '2020-06-25 10:31:08');
+INSERT INTO `kuisioners` VALUES (109, '20', 8, 10, 2, 5, 4, '2020-06-25 10:39:07', '2020-06-25 10:39:07');
+INSERT INTO `kuisioners` VALUES (110, '20', 8, 10, 3, 5, 4, '2020-06-25 10:39:07', '2020-06-25 10:39:07');
+INSERT INTO `kuisioners` VALUES (111, '20', 8, 10, 4, 5, 4, '2020-06-25 10:39:07', '2020-06-25 10:39:07');
+INSERT INTO `kuisioners` VALUES (112, '20', 8, 10, 5, 5, 4, '2020-06-25 10:39:07', '2020-06-25 10:39:07');
+INSERT INTO `kuisioners` VALUES (113, '20', 8, 10, 6, 5, 4, '2020-06-25 10:39:07', '2020-06-25 10:39:07');
+INSERT INTO `kuisioners` VALUES (114, '20', 8, 10, 7, 5, 3, '2020-06-25 10:39:07', '2020-06-25 10:39:07');
+INSERT INTO `kuisioners` VALUES (115, '21', 9, 10, 2, 4, 1, '2020-06-25 15:16:25', '2020-06-25 15:16:25');
+INSERT INTO `kuisioners` VALUES (116, '21', 9, 10, 3, 1, 1, '2020-06-25 15:16:25', '2020-06-25 15:16:25');
+INSERT INTO `kuisioners` VALUES (117, '21', 9, 10, 4, 1, 1, '2020-06-25 15:16:25', '2020-06-25 15:16:25');
+INSERT INTO `kuisioners` VALUES (118, '21', 9, 10, 5, 1, 1, '2020-06-25 15:16:25', '2020-06-25 15:16:25');
+INSERT INTO `kuisioners` VALUES (119, '21', 9, 10, 6, 1, 1, '2020-06-25 15:16:25', '2020-06-25 15:16:25');
+INSERT INTO `kuisioners` VALUES (120, '21', 9, 10, 7, 1, 1, '2020-06-25 15:16:25', '2020-06-25 15:16:25');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -235,7 +268,7 @@ CREATE TABLE `users`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `users_email_unique`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
@@ -243,5 +276,8 @@ CREATE TABLE `users`  (
 INSERT INTO `users` VALUES (1, 1, 'korwil', 'korwil@email.com', '$2y$10$QVwALM/A0wV.ZKAdlIBcmO9KuW0HYkOL.0dd0UAdbq.jgMDByeEZG', '2020-06-13 13:47:25', '2020-06-13 13:47:28');
 INSERT INTO `users` VALUES (12, 2, 'CK131051996', 'fadli@email.com', '$2y$10$4OZc00t6HIgqQEBZP9TTFOBlKN1gEuGqije6aQy17PRv0oDBFyKsa', '2020-06-25 03:31:00', '2020-06-25 03:31:00');
 INSERT INTO `users` VALUES (13, 2, 'CK220121998', 'randi@email.com', '$2y$10$8wplu7M8qN5bqzGL1ecXTexc6bTfjnO2Y8vs6ejbjxNFWlTOkrPxy', '2020-06-25 04:19:32', '2020-06-25 04:19:32');
+INSERT INTO `users` VALUES (14, 2, 'CK321051994', 'vuser129@gmail.com', '$2y$10$Clu4f5FSr6q7BWFL7XpDU.Euyq9.Az4Wt5nw9vFvSkgsVr.qZ63U6', '2020-06-25 10:30:07', '2020-06-25 10:30:07');
+INSERT INTO `users` VALUES (15, 2, 'CK423091998', 'rochman@email.com', '$2y$10$zPxdHHx6FMyZPhx6n8EDqe5iBFp5uhWOxUJIQkI0OVbyCn4rMzTQa', '2020-06-25 15:02:55', '2020-06-25 15:02:55');
+INSERT INTO `users` VALUES (16, 2, 'CK523051998', 'naz@email.com', '$2y$10$V/J5k2a8QQ0vacMAnkJzlOp3oM93Q4PW6Px0jmBwywehEPoNpvfCG', '2020-06-25 15:47:58', '2020-06-25 15:47:58');
 
 SET FOREIGN_KEY_CHECKS = 1;

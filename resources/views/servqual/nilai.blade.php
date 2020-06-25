@@ -3,25 +3,28 @@
 @section('content')
 <div class="app-title">
     <div>
-        <h1>Perhitungan Servqual</h1>
+        <h1>Hasil Survey {{ $assign->company->name }} ({{ $assign->bulan.'-'.$assign->tahun }})</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item active">Perhitungan Servqual </li>
+        <li class="breadcrumb-item active">Hasil Survey</li>
     </ul>
 </div>
 <div class="row">
     <div class="col-md-12">
+        <a href="{{ url('servqual/detail/'.$assign->company->id) }}" class="btn btn-sm btn-primary mb-2">
+            <i class="fa fa-arrow-circle-left"></i> Kembali
+        </a>
         <div class="tile">
             <div class="tile-body">
-                <span class="d-block p-2 bg-primary text-white">Nilai Rata - Rata Gap 5 berdasarkan pertanyaan</span>
+                <span class="d-block p-2 bg-primary text-white">Nilai Rata - Rata Gap 5 Berdasarkan Kriteria</span>
                 <br>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead class="text-center">
                             <tr>
                                 <th rowspan="2" style="vertical-align : middle;text-align:center;">No</th>
-                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Attribut Pernyataan</th>
+                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Attribut Kriteria</th>
                                 <th colspan="2">Harapan</th>
                                 <th colspan="2">Kenyataan</th>
                                 <th rowspan="2" style="vertical-align : middle;text-align:center;">Nilai Gap</th>
@@ -52,15 +55,15 @@
                     </table>
                 </div>
                 
-                <span class="d-block p-2 bg-primary text-white">Nilai Rata - Rata Gap 5 berdasarkan dimensi</span>
+                <span class="d-block p-2 bg-primary text-white">Nilai Rata - Rata Gap 5 Berdasarkan Dimensi</span>
                 <br>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead class="text-center">
                             <tr>
                                 <th rowspan="2" style="vertical-align : middle;text-align:center;">No</th>
-                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Dimensi Pernyataan</th>
-                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Attribut Dimensi</th>
+                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Dimensi</th>
+                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Attribut Kriteria</th>
                                 <th colspan="2">Harapan</th>
                                 <th colspan="2">Kenyataan</th>
                                 <th rowspan="2" style="vertical-align : middle;text-align:center;">Nilai Gap</th>
