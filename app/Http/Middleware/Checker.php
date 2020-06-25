@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class Korwil
+class Checker
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,10 @@ class Korwil
     public function handle($request, Closure $next)
     {
         $role_id = Auth::user()->role_id;
-        if ($role_id == 1) {
+        if ($role_id == 2) {
             return $next($request);
         }else {
-            return redirect('forbid-korwil');
+            return redirect('forbid-checker');
         }
     }
 }
