@@ -32,11 +32,15 @@
                 <br>
                 <div id="dt1">
                     <span class="d-block p-2 bg-primary text-white">Grafik survey berdasarkan Kriteria</span>
-                    <canvas id="myChart" width="400" height=200"></canvas>
+                    @foreach ($companies as $key => $item)
+                    <canvas id="myChart{{$item->id}}" class="dt" width="400" height=200"></canvas>
+                    @endforeach
                 </div>
                 <div id="dt2">
                     <span class="d-block p-2 bg-primary text-white">Grafik survey berdasarkan Dimensi</span>
-                    <canvas id="myDimensi" width="400" height=200"></canvas>
+                    @foreach ($companies as $key => $item)
+                    <canvas id="myDimensi{{$item->id}}" class="dt" width="400" height=200"></canvas>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -96,27 +100,26 @@
 @section('script')
 <script>
     var currenCompany = $('#select').val();
+    $('.dt').hide();
     datas(currenCompany);
     dimensi(currenCompany);
 
     $('#select').change(() => {
+        $('.dt').hide();
         var data = $('#select').val();
         datas(data);
         dimensi(data);
     })
 
     function datas(data){
-        var ctx = document.getElementById('myChart').getContext('2d');
+        var ctx = document.getElementById('myChart' + data).getContext('2d');
         var id = data;
         var urls = "{{url('')}}";
         var url =urls + '/dashboard/chart/' + id;
         var Labels = new Array();
-        var Labels2 = new Array();
         var Datas = new Array();
-        var Datas2 = new Array();
         var Ket = new Array();
         var color = new Array();
-        var color2 = new Array();
 
         $.get(url, function(response){
         // console.log(response.)
@@ -125,6 +128,7 @@
                 Datas.push(data.nilai)
                 color.push('rgba(' + colorGen () +', ' + colorGen () +',' + colorGen () +' )')
             });
+            console.log(data);
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -146,7 +150,7 @@
                     }
                 }
             });
-
+            $('#myChart'+data).show();
         
         });
     }
@@ -156,7 +160,7 @@
         var id = data;
         var urls = "{{url('')}}";
         var url2 =urls + '/dashboard/chartDimensi/' + id;
-        var ctx2 = document.getElementById('myDimensi').getContext('2d');
+        var ctx2 = document.getElementById('myDimensi'+ data).getContext('2d');
         var Labels2 = new Array();
         var Datas2 = new Array();
         var Ket = new Array();
@@ -190,6 +194,7 @@
                 }
             }
         });
+        $('#myDimensi'+data).show();
     });
        
     }
