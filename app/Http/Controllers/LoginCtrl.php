@@ -19,7 +19,11 @@ class LoginCtrl extends Controller
         if ($user !== null) {
             if (password_verify($req->password, $user->password)) {
                 Auth::attempt(['username' => $req->username, 'password' => $req->password]);
-                return redirect('dashboard');
+                if ($user->role_id == 1) {
+                    return redirect('dashboard');
+                }else if($user->role_id == 2){
+                    return redirect('survey');
+                }
             }else {
                 return back()->with('msg', 'Password salah!');
             }
