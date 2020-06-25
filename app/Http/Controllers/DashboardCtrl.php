@@ -16,8 +16,9 @@ class DashboardCtrl extends Controller
     {
         $assignments = Assignment::with(['checker', 'company'])->get();
         $companies = Company::all();
+        $dimensions = Dimension::with('criteria')->get();
 
-        return view('dashboard.index', compact('assignments', 'companies'));
+        return view('dashboard.index', compact('assignments', 'companies', 'dimensions'));
     }
 
     public function chart($id)

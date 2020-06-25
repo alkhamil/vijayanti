@@ -97,6 +97,9 @@
                         </tbody>
                     </table>
                 </div>
+                <br>
+                <h5 class="text-center"><i>"{{ $assign->saran }}"</i></h5>
+                <hr>
             </div>
         </div>
     </div>

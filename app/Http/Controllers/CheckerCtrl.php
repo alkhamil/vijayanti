@@ -12,7 +12,7 @@ class CheckerCtrl extends Controller
 {
     public function index()
     {
-        $checkers = Checker::all();
+        $checkers = Checker::orderBy('id','DESC')->get();
         return view('checker.index', compact('checkers'));
     }
 

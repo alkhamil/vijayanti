@@ -22,7 +22,7 @@ class ServqualCtrl extends Controller
     public function detail($id)
     {
         $company = Company::where('id', $id)->first();
-        $assign = Assignment::where('company_id', $id)->with(['checker','company'])->get();
+        $assign = Assignment::orderBy('id', 'DESC')->where('company_id', $id)->with(['checker','company'])->get();
         $kuisioner = new Kuisioner;
 
         $nilai = $kuisioner->servqual($id, 'all');
