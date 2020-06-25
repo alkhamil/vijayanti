@@ -13,4 +13,8 @@ class Assignment extends Model
     public function checker(){
         return $this->belongsTo(Checker::class, 'checker_id');
     }
+
+    public function kuisioner(){
+        return $this->hasMany(Kuisioner::class, 'assignment_code');
+    }
 }

@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 use App\Assignment;
 use App\Company;
 use App\Checker;
+use App\Kuisioner;
+use App\Criteria;
+use App\Dimension;
+use DB;
+use Mail;
+use PDF;
+use App\Mail\HasilSurvey;
+use Storage;
 
 class AssignmentCtrl extends Controller
 {
@@ -18,44 +26,68 @@ class AssignmentCtrl extends Controller
     }
 
     public function tambah(Request $request)
-    {   
+    {  
         $periode = explode('-', $request->periode);
-        $assignmentExt = Assignment::all()->count();
-        $assignmentExt++;
-        $codeAssignment = 'SK/'.time().'/'.$assignmentExt;
-        $assignment = new Assignment;
-        $assignment->code = $codeAssignment;
-        $assignment->bulan = $periode[0];
-        $assignment->tahun = $periode[1];
-        $assignment->checker_id = $request->checker_id;
-        $assignment->company_id = $request->company_id;
-        if ($assignment->save()) {
-            $checker = Checker::where('id', $request->checker_id)->first();
-            $checker->status = 1; // sedang mantau
-            $checker->save();
-
-            $company = Company::where('id', $request->company_id)->first();
-            $company->status = 1; // sedang dipantau
-            $company->save();
-            return redirect('assignment')->with('msg', 'Data assignment berhasil dibuat!');
+        $cek = DB::table('assignments')
+                    ->where('bulan', $periode[0])
+                    ->where('tahun', $periode[1])
+                    ->where('company_id', $request->company_id)
+                    ->where('checker_id', $request->checker_id)
+                    ->get();
+        if (count($cek) > 0) {
+            $checkerName = Checker::where('id', $request->checker_id)->first()->name;
+            $companyName = Company::where('id', $request->company_id)->first()->name;
+            return redirect('assignment')->with('info', 'Checker '.$checkerName.' pernah melakukan survey ke perusahaan '.$companyName.' di periode '.$request->periode.'! Silahkan buat dengan data lain');
+        }else {
+            $assignmentExt = Assignment::all()->count();
+            $assignmentExt++;
+            $codeAssignment = 'SK/'.time().'/'.$assignmentExt;
+            $assignment = new Assignment;
+            $assignment->code = $codeAssignment;
+            $assignment->bulan = $periode[0];
+            $assignment->tahun = $periode[1];
+            $assignment->checker_id = $request->checker_id;
+            $assignment->company_id = $request->company_id;
+            if ($assignment->save()) {
+                $checker = Checker::where('id', $request->checker_id)->first();
+                $checker->status = 1; // sedang mantau
+                $checker->save();
+    
+                $company = Company::where('id', $request->company_id)->first();
+                $company->status = 1; // sedang dipantau
+                $company->save();
+                return redirect('assignment')->with('msg', 'Data assignment berhasil dibuat!');
+            }
         }
     }
 
     public function done(Request $request, $id)
-    {
-        $assignment = Assignment::where('id', $id)->first();
-        if ($assignment !== null) {
-            $assignment->status = 1;
-            if ($assignment->save()) {
-                $checker = Checker::where('id', $assignment->checker_id)->first();
+    {   
+        $kuisioner = new Kuisioner;
+        $assign = Assignment::where('id', $id)->with(['checker','company'])->first();
+        $nilai = $kuisioner->servqual($id, 'periode');
+        $nilaiDimensi = $kuisioner->dimensiNilai($id, 'periode');
+        $keterangan = $kuisioner;
+        $criteria = Criteria::all();
+        $dimensi = Dimension::with(['criteria'])->get();
+        $pdf = PDF::loadview('servqual.cetak_periode', compact('nilai', 'criteria', 'nilaiDimensi', 'keterangan', 'dimensi', 'assign'));
+        $patternFileName = $assign->company->name.'_'.$assign->bulan.'_'.$assign->tahun.'_('.$assign->checker->name.')';
+        Storage::put('/pdf/'.$patternFileName.'.pdf', $pdf->output());
+        $data['assignment'] = $assign;
+        $data['filename'] = $patternFileName;
+        Mail::to($assign->company->email)->send(new HasilSurvey($data));
+        if ($assign !== null) {
+            $assign->status = 1;
+            if ($assign->save()) {
+                $checker = Checker::where('id', $assign->checker_id)->first();
                 $checker->status = 0;
                 $checker->save();
 
-                $company = Company::where('id', $assignment->company_id)->first();
+                $company = Company::where('id', $assign->company_id)->first();
                 $company->status = 0;
                 $company->save();
             }
-            return redirect('assignment')->with('msg', 'Tugas '.$assignment->code.' Selesai');
+            return redirect('assignment')->with('msg', 'Tugas '.$assign->code.' Selesai');
         }
     }
 }

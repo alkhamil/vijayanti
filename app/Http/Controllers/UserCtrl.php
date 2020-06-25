@@ -11,8 +11,8 @@ class UserCtrl extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        $roles = Role::all();
+        $users = User::where('role_id', 1)->get();
+        $roles = Role::where('name', 'KORWIL')->get();
         return view('user.index', compact('users', 'roles'));
     }
 

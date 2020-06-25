@@ -56,11 +56,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/survey/create', 'SurveyCtrl@survey_create')->name('survey.create');
     Route::get('/survey/detail/{id}', 'SurveyCtrl@detail')->name('survey.detail');
 
-    Route::get('/result', 'ResultCtrl@index')->name('result.index');
-
     Route::get('/servqual', 'ServqualCtrl@company')->name('servqual.company');
     Route::get('/servqual/detail/{id}', 'ServqualCtrl@detail')->name('servqual.detail');
     Route::get('/servqual/nilai/{id}', 'ServqualCtrl@nilai')->name('servqual.nilai');
+    Route::get('/servqual/cetak-semua/{id}', 'ServqualCtrl@cetak_semua')->name('servqual.cetak_semua');
+    Route::get('/servqual/cetak-periode/{id}', 'ServqualCtrl@cetak_periode')->name('servqual.cetak_periode');
     
     Route::get('/kuisioner', 'KuisionerCtrl@index')->name('kuisioner.index');
 
