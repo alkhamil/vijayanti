@@ -50,6 +50,8 @@
             </tbody>
         </table>
     </div>
+    <br>
+    <center><h5><i>"{{ $assign->saran }}"</i></h5></center>
     
  
 </body>
