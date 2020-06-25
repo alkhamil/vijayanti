@@ -19,6 +19,8 @@ Route::post('login', 'LoginCtrl@login_proses')->name('login.proses');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'DashboardCtrl@index')->name('dashboard.index');
     Route::get('/dashboard', 'DashboardCtrl@index')->name('dashboard.index');
+    Route::get('/dashboard/chart/{id}', 'DashboardCtrl@chart')->name('dashboard.chart');
+    Route::get('/dashboard/chartDimensi/{id}', 'DashboardCtrl@chartDimensi')->name('dashboard.chartDimensi');
 
     Route::get('/user', 'UserCtrl@index')->name('user.index');
     Route::post('/user/tambah', 'UserCtrl@tambah')->name('user.tambah');
