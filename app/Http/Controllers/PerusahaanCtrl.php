@@ -52,7 +52,7 @@ class PerusahaanCtrl extends Controller
                 $user->delete();
             }
             $company->delete();
-            return redirect('perusahaan')->with('msg', 'Data perusahaan dan user berhasil dihapus!');
+            return redirect('perusahaan')->with('msg', 'Data perusahaan berhasil dihapus!');
         }
     }
 }

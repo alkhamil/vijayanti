@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class HasilSurvey extends Mailable
+class HasilSurvey extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
     public $data, $pdf;

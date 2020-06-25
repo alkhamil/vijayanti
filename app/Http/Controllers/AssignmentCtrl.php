@@ -32,12 +32,11 @@ class AssignmentCtrl extends Controller
                     ->where('bulan', $periode[0])
                     ->where('tahun', $periode[1])
                     ->where('company_id', $request->company_id)
-                    ->where('checker_id', $request->checker_id)
                     ->get();
         if (count($cek) > 0) {
             $checkerName = Checker::where('id', $request->checker_id)->first()->name;
             $companyName = Company::where('id', $request->company_id)->first()->name;
-            return redirect('assignment')->with('info', 'Checker '.$checkerName.' pernah melakukan survey ke perusahaan '.$companyName.' di periode '.$request->periode.'! Silahkan buat dengan data lain');
+            return redirect('assignment')->with('info', $companyName.' Sudah dilakukan survey pada bulan '.$request->periode.'. Silahkan buat data lain!');
         }else {
             $assignmentExt = Assignment::all()->count();
             $assignmentExt++;
@@ -87,7 +86,25 @@ class AssignmentCtrl extends Controller
                 $company->status = 0;
                 $company->save();
             }
-            return redirect('assignment')->with('msg', 'Tugas '.$assign->code.' Selesai');
+            return redirect('assignment')->with('msg', 'Tugas '.$assign->code.' Selesai dan hasil survei telah dikirim via email ke '.$assign->company->name);
         }
+    }
+
+    public function hapus(Request $request, $id)
+    {
+        $assign = Assignment::where('id', $id)->with('kuisioner')->first();
+        $checker = Checker::where('id', $assign->checker_id)->first();
+        $checker->status = 0;
+        $checker->save();
+        $company = Company::where('id', $assign->company_id)->first();
+        $company->status = 0;
+        $company->save();
+        if (count($assign->kuisioner) > 0) {
+            foreach ($assign->kuisioner as $key => $value) {
+                $value->delete();
+            }
+        }
+        $assign->delete();
+        return redirect('assignment')->with('msg', 'Data terhapus');
     }
 }

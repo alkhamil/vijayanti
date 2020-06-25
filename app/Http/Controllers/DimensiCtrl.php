@@ -10,7 +10,7 @@ class DimensiCtrl extends Controller
 {
     public function index()
     {
-        $dimensions = Dimension::all();
+        $dimensions = Dimension::orderBy('id', 'DESC')->get();
         return view('dimensi.index', compact('dimensions'));
     }
 

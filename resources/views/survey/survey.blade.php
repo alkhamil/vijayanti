@@ -6,7 +6,7 @@
       <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h2 class="text-center">Penilaian Beberapa Aspek</h2>
+                <h2 class="text-center">Attribute Penilaian Survey</h2>
                 <h5 class="text-center">{{ $company->company->name }}</h5>
             </div>
             <div class="card-body">

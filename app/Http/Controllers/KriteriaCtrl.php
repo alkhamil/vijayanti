@@ -12,7 +12,7 @@ class KriteriaCtrl extends Controller
     public function index()
     {
         $dimensions = Dimension::all();
-        $criterias = Criteria::all();
+        $criterias = Criteria::with('dimensi')->orderBy('id', 'DESC')->get();
         return view('kriteria.index', compact('dimensions', 'criterias'));
     }
 
