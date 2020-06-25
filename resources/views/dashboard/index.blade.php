@@ -22,19 +22,75 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button data-toggle="modal" data-target="#standar" class="btn btn-info btn-sm">
+                            <i class="fa fa-eye"></i> Standar Penilaian
+                        </button>
+                    </div>
+                </div>
                 <br>
                 <div id="dt1">
-                    <span class="d-block p-2 bg-primary text-white">Perhitungan semua berdasarkan pernyataan</span>
+                    <span class="d-block p-2 bg-primary text-white">Grafik survey berdasarkan Kriteria</span>
                     <canvas id="myChart" width="400" height=200"></canvas>
                 </div>
                 <div id="dt2">
-                    <span class="d-block p-2 bg-primary text-white">Nilai Rata - Rata Gap 5 berdasarkan dimensi</span>
+                    <span class="d-block p-2 bg-primary text-white">Grafik survey berdasarkan Dimensi</span>
                     <canvas id="myDimensi" width="400" height=200"></canvas>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="standar" tabindex="-1" role="dialog" aria-labelledby="standarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="standarLabel">Standar Penilaian</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+              <table class="table table-bordered table-sm">
+                <thead class="bg-light">
+                    <tr class="text-center">
+                        <th style="vertical-align : middle;text-align:center;">No</th>
+                        <th style="vertical-align : middle;text-align:center;">Kode</th>
+                        <th style="vertical-align : middle;text-align:center;">Item Kriteria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $x = 0;
+                    @endphp
+                    @foreach ($dimensions as $key => $d)
+                        <tr>
+                            <td class="bg-dark text-white" colspan="12">Dimensi {{ $d->name }} ({{ $d->description }})</td>
+                        </tr>
+                            @foreach ($d->criteria as $no => $value)
+                                <tr>
+                                    <td class="text-center">{{ $x + 1 }}</td>
+                                    <td class="text-center">{{ $value->code }}</td>
+                                    <td>{{ $value->content }}</td>
+                                </tr>
+                                @php
+                                $x++; 
+                                @endphp
+                            @endforeach
+                            @php
+                                $x= $x;
+                            @endphp  
+                    @endforeach
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 
 @section('script')

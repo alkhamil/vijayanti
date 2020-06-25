@@ -34,7 +34,6 @@
                 <tr>
                     <th style="vertical-align : middle;text-align:center;">No</th>
                     <th style="vertical-align : middle;text-align:center;">Attribut Kriteria</th>
-                    <th style="vertical-align : middle;text-align:center;">Dimensi</th>
                     <th style="vertical-align : middle;text-align:center;">Keterangan</th>
                 </tr>
             </thead>
@@ -43,7 +42,6 @@
                     <tr>
                         <th>{{ $key+1 }}</th>
                         <td>{{ $item->content }}</td>
-                        <td>{{ $item->dimensi->name }}</td>
                         <td>{{$keterangan->keterangan($nilai['ratakenyataan'][$item->id] - $nilai['rataharapan'][$item->id])}}</td>
                     </tr>
                 @endforeach

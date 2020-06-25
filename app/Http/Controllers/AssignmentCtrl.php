@@ -19,7 +19,7 @@ class AssignmentCtrl extends Controller
 {
     public function index()
     {
-        $assignments = Assignment::with(['checker', 'company'])->get();
+        $assignments = Assignment::orderBy('id', 'DESC')->with(['checker', 'company'])->get();
         $companies = Company::where('status', 0)->get();
         $checkers = Checker::where('status', 0)->get();
         return view('assignment.index', compact('assignments', 'companies', 'checkers'));
