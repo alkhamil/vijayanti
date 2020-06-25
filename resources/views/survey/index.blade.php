@@ -20,7 +20,7 @@
         <div class="tile">
             <div class="tile-body">
                 <div class="table-responsive">
-                    <table class="table table-sm table-hover table-bordered" id="sampleTable">
+                    <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -39,7 +39,7 @@
                                     <td>{{ $c->bulan.'/'.$c->tahun }}</td>
                                     <td class="text-center">
                                         @php
-                                            $kuis = \App\Kuisioner::where('assignment_code', $c->id)->get()->count();
+                                            $kuis = $c->kuisioner->count();
                                         @endphp
                                         @if($kuis <= 0)
                                             <a href="{{ url('survey/'.$c->id) }}" class="btn btn-info btn-sm">

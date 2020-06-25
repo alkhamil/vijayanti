@@ -15,8 +15,8 @@
                         <div class="form-group">
                             <label>Pilih Perusahaan</label>
                             <select id="select" class="form-control">
-                                @foreach ($assignments as $key=>$item)
-                                    <option value="{{$item->company->id}}">{{$item->company->name}}</option>
+                                @foreach ($companies as $key => $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -50,10 +50,10 @@
     })
 
     function datas(data){
+        var ctx = document.getElementById('myChart').getContext('2d');
         var id = data;
         var urls = "{{url('')}}";
         var url =urls + '/dashboard/chart/' + id;
-        var ctx = document.getElementById('myChart').getContext('2d');
         var Labels = new Array();
         var Labels2 = new Array();
         var Datas = new Array();
@@ -65,7 +65,7 @@
         $.get(url, function(response){
         // console.log(response.)
             response.forEach(function(data){
-                Labels.push(data.id)
+                Labels.push(data.code)
                 Datas.push(data.nilai)
                 color.push('rgba(' + colorGen () +', ' + colorGen () +',' + colorGen () +' )')
             });
@@ -96,7 +96,7 @@
     }
 
     function dimensi(data){
-
+        $('#myDimensi').html("");
         var id = data;
         var urls = "{{url('')}}";
         var url2 =urls + '/dashboard/chartDimensi/' + id;

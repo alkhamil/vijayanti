@@ -8,14 +8,16 @@ use App\Assignment;
 use App\Kuisioner;
 use App\Criteria;
 use App\Dimension;
+use App\Company;
 
 class DashboardCtrl extends Controller
 {
     public function index()
     {
         $assignments = Assignment::with(['checker', 'company'])->get();
+        $companies = Company::all();
 
-        return view('dashboard.index', compact('assignments'));
+        return view('dashboard.index', compact('assignments', 'companies'));
     }
 
     public function chart($id)
@@ -29,6 +31,7 @@ class DashboardCtrl extends Controller
             $hasil[$key]['id'] = $key +1;
             $hasil[$key]['nilai'] = number_format($nilai['ratakenyataan'][$data->id] - $nilai['rataharapan'][$data->id], 2);
             $hasil[$key]['ket'] = $data->content;
+            $hasil[$key]['code'] = $data->code;
         }
 
         return response()->json($hasil);

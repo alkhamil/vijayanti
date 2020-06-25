@@ -38,7 +38,7 @@ class SurveyCtrl extends Controller
         $user = Checker::where('user_id', $auth->id)->first();
 
         $assign = Assignment::where('id', $request->assign_id)->first();
-        // $assign->status = 1;
+        $assign->saran = $request->saran;
         if ($assign->save()) {
             foreach($criteria as $data){
                 $kuisioner = new Kuisioner;
@@ -52,7 +52,7 @@ class SurveyCtrl extends Controller
             }
         }
 
-        return redirect('survey')->with('msg', 'Data dimensi berhasil dibuat!');
+        return redirect('survey')->with('msg', 'Penilaian sudah di buat!');
     }
 
     public function detail($id)

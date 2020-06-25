@@ -3,21 +3,24 @@
 @section('content')
 <div class="app-title">
     <div>
-        <h1>Perhitungan Servqual {{ $company->name }}</h1>
+        <h1>Hasil Survey {{ $company->name }}</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item active">Perhitungan Servqual </li>
+        <li class="breadcrumb-item active">Hasil Survey</li>
     </ul>
 </div>
 <div class="row">
     <div class="col-md-12">
+        <a href="{{ url('servqual') }}" class="btn btn-sm btn-primary mb-2">
+            <i class="fa fa-arrow-circle-left"></i> Kembali
+        </a>
         <div class="tile">
             <div class="tile-body">
-                <span class="d-block p-2 bg-primary text-white">Perhitungan per Periode</span>
+                <span class="d-block p-2 bg-primary text-white">Hasil survey per periode</span>
                 <br>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="sampleTable">
                         <thead class="text-center">
                             <tr>
                                 <th>No</th>
@@ -31,7 +34,7 @@
                         <tbody>
                             @foreach ($assign as $key => $data)
                                 <tr>
-                                    <th class="text-center">{{$key+1}}</th>
+                                    <td class="text-center">{{$key+1}}</td>
                                     <td>{{ $data->code }}</td>
                                     <td>{{ $data->checker->name }}</td>
                                     <td class="text-center">{{ $data->bulan }}</td>
@@ -46,24 +49,24 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            <tr></tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="tile-head mt-3">
-                    <h3>Perhitungan Semua {{ $company->name }}</h3>
+                <hr>
+                <div class="tile-head mt-5">
+                    <h3>Hasil survey keseluruhan <u>{{ $company->name }}</u></h3>
                     <a target="_blank" href="{{ route('servqual.cetak_semua', $company->id) }}" class="btn btn-sm mb-2 btn-primary">
                         <i class="fa fa-file-pdf-o"></i> Cetak
                     </a>
                 </div>
-                <span class="d-block p-2 bg-primary text-white">Perhitungan semua berdasarkan pernyataan</span>
+                <span class="d-block p-2 bg-primary text-white">Perhitungan semua berdasarkan Kriteria</span>
                 <br>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead class="text-center">
                             <tr>
                                 <th rowspan="2" style="vertical-align : middle;text-align:center;">No</th>
-                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Attribut Pernyataan</th>
+                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Attribut Kriteria</th>
                                 <th colspan="2">Harapan</th>
                                 <th colspan="2">Kenyataan</th>
                                 <th rowspan="2" style="vertical-align : middle;text-align:center;">Nilai Gap</th>
@@ -93,15 +96,15 @@
                         </tbody>
                     </table>
                 </div>
-                <span class="d-block p-2 bg-primary text-white">Nilai Rata - Rata Gap 5 berdasarkan dimensi</span>
+                <span class="d-block p-2 bg-primary text-white">Nilai Rata - Rata Gap 5 berdasarkan Dimensi</span>
                 <br>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead class="text-center">
                             <tr>
                                 <th rowspan="2" style="vertical-align : middle;text-align:center;">No</th>
-                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Dimensi Pernyataan</th>
-                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Attribut Dimensi</th>
+                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Dimensi</th>
+                                <th rowspan="2" style="vertical-align : middle;text-align:center;">Attribut Kriteria</th>
                                 <th colspan="2">Harapan</th>
                                 <th colspan="2">Kenyataan</th>
                                 <th rowspan="2" style="vertical-align : middle;text-align:center;">Nilai Gap</th>

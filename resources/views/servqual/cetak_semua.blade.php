@@ -20,7 +20,7 @@
             <thead class="text-center">
                 <tr>
                     <th style="vertical-align : middle;text-align:center;">No</th>
-                    <th style="vertical-align : middle;text-align:center;">Attribut Pernyataan</th>
+                    <th style="vertical-align : middle;text-align:center;">Attribut Kriteria</th>
                     <th style="vertical-align : middle;text-align:center;">Dimensi</th>
                     <th style="vertical-align : middle;text-align:center;">Keterangan</th>
                 </tr>
