@@ -10,13 +10,17 @@
     <div class="col-md-12">
         <div class="tile">
             <div class="tile-body">
-                <div class="">
-                    <select id="select" class="form-control" >
-                            <option value="" selected>-</option>
-                        @foreach ($assignments as $key=>$item)
-                            <option value="{{$item->company->id}}">{{$item->company->name}}</option>
-                        @endforeach
-                    </select>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Pilih Perusahaan</label>
+                            <select id="select" class="form-control">
+                                @foreach ($assignments as $key=>$item)
+                                    <option value="{{$item->company->id}}">{{$item->company->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <div id="dt1">
@@ -35,16 +39,14 @@
 
 @section('script')
 <script>
-    $('#dt1').hide();
-    $('#dt2').hide();
+    var currenCompany = $('#select').val();
+    datas(currenCompany);
+    dimensi(currenCompany);
 
     $('#select').change(() => {
         var data = $('#select').val();
         datas(data);
         dimensi(data);
-        
-        $('#dt1').show();
-        $('#dt2').show();
     })
 
     function datas(data){
