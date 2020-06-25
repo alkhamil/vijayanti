@@ -87,13 +87,13 @@ class Kuisioner extends Model
     public function keterangan($a)
     {
         if($a < 0){
-            $ket = 'Tidak puas';
+            $ket = 'Kurang Baik';
         }
         if($a == 0){
-            $ket = 'Cukup puas ';
+            $ket = 'Baik';
         }
         if($a > 0){
-            $ket = 'Sangat puas';
+            $ket = 'Sangat Baik';
         }
 
         return $ket;

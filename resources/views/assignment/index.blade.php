@@ -20,6 +20,11 @@
                 {{ Session::get('msg') }}
             </div>
         @endif
+        @if (Session::has('info'))
+            <div class="alert alert-warning mb-2">
+                <strong>{{ Session::get('info') }}</strong>
+            </div>
+        @endif
         <div class="tile">
             <div class="tile-body">
                 <div class="table-responsive">
@@ -31,7 +36,7 @@
                                 <th>Checker</th>
                                 <th>Perusahaan</th>
                                 <th>Status</th>
-                                <th>Periode</th>
+                                <th>Periode Bertugas</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -52,14 +57,11 @@
                                     <td class="text-center">{{ $a->bulan }}/{{ $a->tahun }}</td>
                                     <td>
                                         @if ($a->status == 0)
-                                            @php
-                                                $kuis = \App\Kuisioner::where('assignment_code', $a->id)->get()->count();
-                                            @endphp    
-                                            <button @if($kuis <= 0) disabled style="cursor: not-allowed" title="Belum dikerjakan" @endif data-toggle="modal" data-target="#done-assigment{{ $a->id }}" class="btn btn-success btn-sm">
-                                                <i class="fa fa-check"></i> Selesai
-                                            </button>
-                                        @else 
-                                            -
+                                            @if (count($a->kuisioner) > 0)
+                                                <button data-toggle="modal" data-target="#done-assigment{{ $a->id }}" class="btn btn-success btn-sm">
+                                                    <i class="fa fa-check"></i> Selesai
+                                                </button>
+                                            @endif
                                         @endif
                                     </td>
                                 </tr>
@@ -106,17 +108,20 @@
     <form action="{{ route('assignment.tambah') }}" method="POST">
         @csrf
         <div class="modal-body">
-            <div class="row no-gutters">
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label>Tanggal Mulai Periode</label>
-                        <input name="periode" class="datepicker" class="form-control" data-date-format="mm/dd/yyyy">
+            <div class="form-group">
+                <label>Periode Bertugas</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-calendar text-primary"></i>
+                        </div>
                     </div>
+                    <input name="periode" class="datepicker" class="form-control" data-date-format="mm/dd/yyyy" autocomplete="off" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>Pilih Checker</label>
-                <select name="checker_id" class="form-control">
+                <select name="checker_id" class="form-control" required>
                     @foreach ($checkers as $ck)
                         <option value="{{ $ck->id }}">{{ $ck->name }}</option>
                     @endforeach
@@ -124,7 +129,7 @@
             </div>
             <div class="form-group">
                 <label>Pilih Perusahaan</label>
-                <select name="company_id" class="form-control">
+                <select name="company_id" class="form-control" required>
                     @foreach ($companies as $cm)
                         <option value="{{ $cm->id }}">{{ $cm->name }}</option>
                     @endforeach
@@ -146,10 +151,10 @@
         $('.datepicker').datepicker({
             format: "mm-yyyy",
             viewMode: "months",
-            endDate : (new Date('mm-yyyy') + '-01'),
             minViewMode: "months",
+            endDate : (new Date('mm-yyyy') + '-01'),
+            autoclose: true,
             startDate: '-3d',
-            autoclose: true
         });
     </script>
 @endsection

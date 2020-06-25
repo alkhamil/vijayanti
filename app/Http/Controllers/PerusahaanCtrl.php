@@ -18,32 +18,15 @@ class PerusahaanCtrl extends Controller
 
     public function tambah(Request $request)
     {
-        $companyExt = User::where('role_id', '3')->get()->count();
-        $companyExt++;
-        $date_standing = explode('-',$request->date_standing);
-        $reversedate_standing = $date_standing[2].$date_standing[1].$date_standing[0];
-        $patternUsername = "PT".$companyExt.$reversedate_standing;
-        $patternPassword = Hash::make("PT".$companyExt.$reversedate_standing);
-        $user = new User;
-        $user->role_id = 3;
-        $user->username = $patternUsername;
-        $user->email = $request->email;
-        $user->password = $patternPassword;
-
-        if ($user->save()) {
-            $company = new Company;
-            $company->user_id = $user->id;
-            $company->name = Str::upper($request->name);
-            $company->date_standing = $request->date_standing;
-            $company->region = $request->region;
-            $company->phone = $request->phone;
-            $company->email = $request->email;
-            $company->address = $request->address;
-            $company->status = 0; // tidak sedang di pantau
-            $company->save();
-            return redirect('perusahaan')->with('msg', 'Data perusahaan dan akun berhasil dibuat!');
-        }
-
+        $company = new Company;
+        $company->name = Str::upper($request->name);
+        $company->region = $request->region;
+        $company->phone = $request->phone;
+        $company->email = $request->email;
+        $company->address = $request->address;
+        $company->status = 0; // tidak sedang di pantau
+        $company->save();
+        return redirect('perusahaan')->with('msg', 'Data perusahaan dan akun berhasil dibuat!');
     }
 
     public function edit(Request $request)

@@ -38,7 +38,10 @@
                                     <td class="text-center">{{$data->tahun}}</td>
                                     <td class="text-center">
                                         <a href="{{ url('servqual/nilai/'.$data->id) }}" class="btn btn-info btn-sm">
-                                            <i class="fa fa-edit"></i> hasil
+                                            <i class="fa fa-edit"></i> Hasil
+                                        </a>
+                                        <a target="_blank" href="{{ route('servqual.cetak_periode', $data->id) }}" class="btn btn-sm btn-primary">
+                                            <i class="fa fa-file-pdf-o"></i> Cetak
                                         </a>
                                     </td>
                                 </tr>
@@ -49,6 +52,9 @@
                 </div>
                 <div class="tile-head mt-3">
                     <h3>Perhitungan Semua {{ $company->name }}</h3>
+                    <a target="_blank" href="{{ route('servqual.cetak_semua', $company->id) }}" class="btn btn-sm mb-2 btn-primary">
+                        <i class="fa fa-file-pdf-o"></i> Cetak
+                    </a>
                 </div>
                 <span class="d-block p-2 bg-primary text-white">Perhitungan semua berdasarkan pernyataan</span>
                 <br>

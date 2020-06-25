@@ -3,11 +3,11 @@
 @section('content')
 <div class="app-title">
     <div>
-        <h1>My Assignment</h1>
+        <h1>Isi Survey</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item active">My Assignment</li>
+        <li class="breadcrumb-item active">Isi Survey</li>
     </ul>
 </div>
 <div class="row">
@@ -26,6 +26,7 @@
                                 <th>#</th>
                                 <th>No SK</th>
                                 <th>Perusahaan</th>
+                                <th>Periode</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -35,17 +36,18 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $c->code }}</td>
                                     <td>{{ $c->company->name }}</td>
+                                    <td>{{ $c->bulan.'/'.$c->tahun }}</td>
                                     <td class="text-center">
                                         @php
                                             $kuis = \App\Kuisioner::where('assignment_code', $c->id)->get()->count();
                                         @endphp
                                         @if($kuis <= 0)
-                                        <a href="{{ url('survey/'.$c->id) }}" class="btn btn-info btn-sm">
-                                            <i class="fa fa-edit"></i> Survey
-                                        </a>
+                                            <a href="{{ url('survey/'.$c->id) }}" class="btn btn-info btn-sm">
+                                                <i class="fa fa-edit"></i> Survey
+                                            </a>
                                         @endif
                                         @if ($kuis > 0)
-                                            <i class="fa fa-check text-success"></i> selesai
+                                            <i class="fa fa-check text-success"></i> Selesai
                                         @endif
                                     </td>
                                 </tr>

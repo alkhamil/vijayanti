@@ -28,8 +28,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama</th>
-                                <th>Tanggal Berdiri</th>
                                 <th>Wilayah</th>
+                                <th>Email</th>
                                 <th>Telepon</th>
                                 <th>Alamat</th>
                                 <th>Aksi</th>
@@ -40,8 +40,8 @@
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $c->name }}</td>
-                                    <td>{{ date('d/m/Y', strtotime($c->date_standing)) }}</td>
                                     <td>{{ $c->region }}</td>
+                                    <td>{{ $c->email }}</td>
                                     <td>{{ $c->phone }}</td>
                                     <td>{{ $c->address }}</td>
                                     <td>
@@ -50,9 +50,6 @@
                                         </button>
                                         <button data-toggle="modal" data-target="#hapus-perusahaan{{ $c->id }}" class="btn btn-danger btn-sm">
                                             <i class="fa fa-trash"></i> Hapus
-                                        </button>
-                                        <button data-toggle="modal" data-target="#info-akun{{ $c->id }}" class="btn btn-secondary btn-sm">
-                                            <i class="fa fa-lock"></i> Info Akun
                                         </button>
                                     </td>
                                 </tr>
@@ -74,10 +71,6 @@
                                             <div class="form-group">
                                                 <label>Nama Perusahaan</label>
                                                 <input type="text" name="name" value="{{ $c->name }}" class="form-control" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Tanggal Berdiri</label>
-                                                <input type="date" name="date_standing" value="{{ $c->date_standing }}" class="form-control" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label>Wilayah</label>
@@ -125,43 +118,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Modal Info akun -->
-                                <div class="modal fade" id="info-akun{{ $c->id }}" tabindex="-1" role="dialog" aria-labelledby="tambah-perusahaanLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header bg-primary text-white">
-                                            <h5 class="modal-title text-center" id="tambah-perusahaanLabel">Informasi Akun</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true" class="text-white">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            @php
-                                                $user = \App\User::where('id', $c->user_id)->first();
-                                            @endphp
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    USERNAME
-                                                </div>
-                                                <div class="col-md-6 text-right">
-                                                    <b>: {{ $user->username }}</b>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    PASSWORD
-                                                </div>
-                                                <div class="col-md-6 text-right">
-                                                    <b>: {{ $user->username }}</b>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
                             @endforeach
                         </tbody>
                     </table>
@@ -187,10 +143,6 @@
            <div class="form-group">
                <label>Nama Perusahaan</label>
                <input type="text" name="name" class="form-control" required>
-           </div>
-           <div class="form-group">
-               <label>Tanggal Berdiri</label>
-               <input type="date" name="date_standing" class="form-control" required>
            </div>
            <div class="form-group">
                <label>Wilayah</label>

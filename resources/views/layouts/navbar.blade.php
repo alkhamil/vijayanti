@@ -19,13 +19,13 @@
         <p class="text-white text-bold">{{ Str::upper($auth->username) }}</p>
     </div>
     <ul class="app-menu">
-        <li>
-            <a @if($s1 == "/" || $s1 == "dashboard") class="app-menu__item active" @else class="app-menu__item" @endif href="{{ url('dashboard') }}">
-                <i class="app-menu__icon fa fa-dashboard"></i>
-                <span class="app-menu__label">Dashboard</span>
-            </a>
-        </li>
         @if ($auth->role_id == 1)
+            <li>
+                <a @if($s1 == "/" || $s1 == "dashboard") class="app-menu__item active" @else class="app-menu__item" @endif href="{{ url('dashboard') }}">
+                    <i class="app-menu__icon fa fa-dashboard"></i>
+                    <span class="app-menu__label">Dashboard</span>
+                </a>
+            </li>
             <li>
                 <a @if($s1 == "user") class="app-menu__item active" @else class="app-menu__item" @endif href="{{ url('user') }}">
                     <i class="app-menu__icon fa fa-user"></i>
@@ -64,22 +64,15 @@
             </li>
             <li>
                 <a @if($s1 == "servqual") class="app-menu__item active" @else class="app-menu__item" @endif href="{{ url('servqual') }}">
-                    <i class="app-menu__icon fa fa-calculator"></i>
-                    <span class="app-menu__label">Perhitungan Servqual</span>
+                    <i class="app-menu__icon fa fa-file-o"></i>
+                    <span class="app-menu__label">Hasil Survey</span>
                 </a>
             </li>
         @elseif ($auth->role_id == 2)
             <li>
                 <a @if($s1 == "survey") class="app-menu__item active" @else class="app-menu__item" @endif href="{{ url('survey') }}">
                     <i class="app-menu__icon fa fa-file"></i>
-                    <span class="app-menu__label">My Assignment</span>
-                </a>
-            </li>
-        @elseif ($auth->role_id == 3)
-            <li>
-                <a @if($s1 == "result") class="app-menu__item active" @else class="app-menu__item" @endif href="{{ url('result') }}">
-                    <i class="app-menu__icon fa fa-file"></i>
-                    <span class="app-menu__label">Result</span>
+                    <span class="app-menu__label">Isi Survey</span>
                 </a>
             </li>
         @endif

@@ -3,11 +3,11 @@
 @section('content')
 <div class="app-title">
     <div>
-        <h1>Perhitungan Servqual</h1>
+        <h1>Hasil Survey</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item active">Perhitungan Servqual</li>
+        <li class="breadcrumb-item active">Hasil Survey</li>
     </ul>
 </div>
 <div class="row">
@@ -30,7 +30,7 @@
                                     <td>{{ $c->name }}</td>
                                     <td class="text-center">
                                         <a href="{{ url('servqual/detail/'.$c->id) }}" class="btn btn-info btn-sm">
-                                            <i class="fa fa-edit"></i> view
+                                            <i class="fa fa-eye"></i> Lihat
                                         </a>
                                     </td>
                                 </tr>

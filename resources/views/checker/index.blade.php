@@ -75,11 +75,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Tanggal Lahir</label>
-                                                    <input type="date" name="birthday" value="{{ $c->birthday }}" class="form-control" readonly>
+                                                    <input type="date" name="birthday" value="{{ $c->birthday }}" class="form-control" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Email</label>
-                                                    <input type="email" name="email" value="{{ $c->email }}" class="form-control" readonly>
+                                                    <input type="email" name="email" value="{{ $c->email }}" class="form-control" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Telepon</label>
