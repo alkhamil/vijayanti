@@ -29,7 +29,7 @@
     </table>
     <br>
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-sm">
             <thead class="text-center">
                 <tr>
                     <th style="vertical-align : middle;text-align:center;">No</th>

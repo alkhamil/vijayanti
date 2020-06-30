@@ -178,7 +178,7 @@
             format: "mm-yyyy",
             viewMode: "months",
             minViewMode: "months",
-            endDate : (new Date('mm-yyyy') + '-01'),
+            // endDate : (new Date('mm-yyyy') + '-01'),
             autoclose: true,
             startDate: '-3d',
         });
