@@ -50,9 +50,9 @@ class Kuisioner extends Model
         foreach($data['kenyataan'] as $key => $db)
         {
             $hasil['bobotkenyataan'][$key] = array_sum($data['kenyataan'][$key]);
-            $hasil['ratakenyataan'][$key] = array_sum($data['kenyataan'][$key]) / count($data['kenyataan'][$key]);
+            $hasil['ratakenyataan'][$key] = number_format(array_sum($data['kenyataan'][$key]) / count($data['kenyataan'][$key]), 1);
             $hasil['bobotharapan'][$key] = array_sum($data['harapan'][$key]);
-            $hasil['rataharapan'][$key] = array_sum($data['harapan'][$key]) / count($data['harapan'][$key]);
+            $hasil['rataharapan'][$key] = number_format(array_sum($data['harapan'][$key]) / count($data['harapan'][$key]), 1);
         }   
 
         return $hasil;
@@ -75,9 +75,9 @@ class Kuisioner extends Model
                 $rataH += $kriteria['rataharapan'][$dt->id]; 
 
                 $hasil['bobotkenyataan'][$data->id] = $rataK;   
-                $hasil['ratakenyataan'][$data->id] = number_format($rataK/ count($data->criteria), 2);   
+                $hasil['ratakenyataan'][$data->id] = number_format($rataK/ count($data->criteria), 1);   
                 $hasil['bobotharapan'][$data->id] = $rataH;   
-                $hasil['rataharapan'][$data->id] = number_format($rataH/ count($data->criteria), 2);   
+                $hasil['rataharapan'][$data->id] = number_format($rataH/ count($data->criteria), 1);   
             }
         }
 
