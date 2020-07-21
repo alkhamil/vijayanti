@@ -68,7 +68,6 @@ class ServqualCtrl extends Controller
     {
         $kuisioner = new Kuisioner;
         $assign = Assignment::where('id', $id)->with(['checker','company'])->first();
-
         $nilai = $kuisioner->servqual($id, 'periode');
         $nilaiDimensi = $kuisioner->dimensiNilai($id, 'periode');
         $keterangan = $kuisioner;

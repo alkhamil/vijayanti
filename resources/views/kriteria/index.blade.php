@@ -136,6 +136,7 @@
                 <div class="form-group">
                     <label>Kode Kriteria</label>
                     <input type="text" name="code" class="form-control" value="K{{ count($criterias)+1 }}" readonly>
+                    <input type="hiden" name="nomor" class="form-control" value="{{ count($criterias)+1 }}">
                 </div>
                 <div class="form-group">
                     <label>Isi Kriteria</label>

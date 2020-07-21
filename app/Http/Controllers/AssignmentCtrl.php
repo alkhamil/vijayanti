@@ -45,6 +45,7 @@ class AssignmentCtrl extends Controller
             $assignment->code = $codeAssignment;
             $assignment->bulan = $periode[0];
             $assignment->tahun = $periode[1];
+            $assignment->nilai_harapan = $request->nilai_harapan;
             $assignment->checker_id = $request->checker_id;
             $assignment->company_id = $request->company_id;
             if ($assignment->save()) {

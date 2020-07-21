@@ -40,7 +40,7 @@ class SurveyCtrl extends Controller
         $assign = Assignment::where('id', $request->assign_id)->first();
         $assign->saran = $request->saran;
         if ($assign->save()) {
-            foreach($criteria as $data){
+            foreach($criteria as $key => $data){
                 $kuisioner = new Kuisioner;
                 $kuisioner->user_id = $user->id;
                 $kuisioner->assignment_code = $assign->id;
@@ -48,6 +48,7 @@ class SurveyCtrl extends Controller
                 $kuisioner->criteria_id = $data->id;
                 $kuisioner->kenyataan = empty($request->k[$data->id]) ? 0 : $request->k[$data->id];
                 $kuisioner->harapan = empty($request->h[$data->id]) ? 0 : $request->h[$data->id];
+                $kuisioner->saran = $request->saran_attr[$key];
                 $kuisioner->save();
             }
         }

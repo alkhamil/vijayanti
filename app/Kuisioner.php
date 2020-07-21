@@ -28,6 +28,7 @@ class Kuisioner extends Model
         if(count($k)){
             foreach($k as $data)
             {
+                $hasil['saran'][$data->criteria_id] = $data->saran;
                 $hasil['kenyataan'][$data->criteria_id][] = $data->kenyataan;
                 $hasil['harapan'][$data->criteria_id][] =  $data->harapan;
             }
@@ -35,11 +36,11 @@ class Kuisioner extends Model
         }else{
             foreach($c as $data)
             {
+                $hasil['saran'][$data->id][] = null;
                 $hasil['kenyataan'][$data->id][] = 0;
                 $hasil['harapan'][$data->id][] =  0;
             }
         }
-
         return $hasil;
     }
 
@@ -53,8 +54,8 @@ class Kuisioner extends Model
             $hasil['ratakenyataan'][$key] = number_format(array_sum($data['kenyataan'][$key]) / count($data['kenyataan'][$key]), 1);
             $hasil['bobotharapan'][$key] = array_sum($data['harapan'][$key]);
             $hasil['rataharapan'][$key] = number_format(array_sum($data['harapan'][$key]) / count($data['harapan'][$key]), 1);
+            $hasil['saran'][$key] = $data['saran'][$key];
         }   
-
         return $hasil;
     }
 

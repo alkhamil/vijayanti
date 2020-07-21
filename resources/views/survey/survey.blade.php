@@ -30,6 +30,7 @@
                                         <th rowspan="2" style="vertical-align : middle;text-align:center;">Item Kriteria</th>
                                         <th colspan="5" style="border-right: 2px solid #000;">Kenyataan</th>
                                         <th colspan="5">Harapan</th>
+                                        <th rowspan="2" style="vertical-align : middle;text-align:center;">Komentar / Saran</th>
                                     </tr>
                                     <tr class="text-center">
                                         <th>1</th>
@@ -49,19 +50,25 @@
                                         $x = 0;
                                     @endphp
                                     @foreach ($dimensions as $key => $d)
+                                        @php
+                                            $bab = $key+1
+                                        @endphp
                                         <tr>
-                                            <td class="bg-dark text-white" colspan="12">Dimensi {{ $d->name }} ({{ $d->description }})</td>
+                                            <td class="bg-dark text-white" colspan="13">{{ $bab.'.' }} Dimensi {{ $d->name }} ({{ $d->description }})</td>
                                         </tr>
                                             @foreach ($d->criteria as $no => $value)
                                                 <tr>
-                                                    <th class="text-center">{{ $x + 1 }}</th>
+                                                    <th class="text-center">{{ $bab }}.{{ $no+1 }}</th>
                                                     <td>{{ $value->content }}</td>
                                                     @for ($i = 0; $i < 5; $i++)
                                                     <td class="text-center" @if($i==4) style="border-right: 2px solid #000;" @endif><input style="cursor: pointer" name="k[{{$value->id}}]" type="radio" value="{{ $i + 1 }}" required></td>
                                                     @endfor
                                                     @for ($i = 0; $i < 5; $i++)
-                                                    <td class="text-center"><input style="cursor: pointer" name="h[{{$value->id}}]" type="radio" value="{{ $i + 1 }}" required></td>
+                                                    <td class="text-center"><input style="cursor: pointer" name="h[{{$value->id}}]" type="radio" value="{{ $i + 1 }}" @if ($i==$company->nilai_harapan-1) checked @else disabled @endif></td>
                                                     @endfor
+                                                    <td>
+                                                        <textarea name="saran_attr[]" class="form-control" cols="5" rows="2"></textarea>
+                                                    </td>
                                                 </tr>
                                                 @php
                                                 $x++; 
@@ -77,7 +84,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label><strong>Saran / Komentar</strong></label>
-                                <textarea name="saran" class="form-control" cols="10" rows="5" required></textarea>
+                                <textarea name="saran_all" class="form-control" cols="10" rows="5" required></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-success" >
