@@ -29,27 +29,109 @@
     </table>
     <br>
     <div class="table-responsive">
-        <table class="table table-bordered table-sm">
+        <table class="table table-sm table-bordered">
             <thead class="text-center">
                 <tr>
-                    <th style="vertical-align : middle;text-align:center;">No</th>
-                    <th style="vertical-align : middle;text-align:center;">Attribut Kriteria</th>
-                    <th style="vertical-align : middle;text-align:center;">Keterangan</th>
+                    <th>No</th>
+                    <th>Nama Dimensi</th>
+                    <th>Nilai Bobot</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($criteria as $key => $item)
+                @foreach ($dimensi as $key => $item)
                     <tr>
-                        <th>{{ $key+1 }}</th>
-                        <td>{{ $item->content }}</td>
-                        <td>{{$keterangan->keterangan($nilai['ratakenyataan'][$item->id] - $nilai['rataharapan'][$item->id])}}</td>
+                        <th class="text-center">{{ $key+1 }}</th>
+                        <td>{{ $item->name }} ({{ $item->description }})</td>
+                        <td class="text-center">{{ $nilaiDimensi['ratakenyataan'][$item->id] - $nilaiDimensi['rataharapan'][$item->id] }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-    <br>
-    <center><h5><i>"{{ $assign->saran }}"</i></h5></center>
+    @php
+        $kesesuaian = [];
+        $kelemahan = [];
+        foreach ($criteria as $key => $item) {
+            $cek = $nilai['ratakenyataan'][$item->id] - $nilai['rataharapan'][$item->id];
+            $ket = $keterangan->keterangan($nilai['ratakenyataan'][$item->id] - $nilai['rataharapan'][$item->id]);
+            $saran = $nilai['saran'][$item->id];
+            if ($cek >= 0) {
+                foreach ($item->dimensi->criteria as $key => $dc) {
+                    if ($dc->id == $item->id) {
+                        $nomor = $key+1;
+                    }
+                }
+                $data['no'] = $item->dimensi->nomor.'.'.$nomor;
+                $data['content'] = $item->content;
+                $data['saran'] = $saran;
+                $data['ket'] = $ket;
+                array_push($kesesuaian, $data);
+            }
+            if ($cek < 0) {
+                foreach ($item->dimensi->criteria as $key => $dc) {
+                    if ($dc->id == $item->id) {
+                        $nomor = $key+1;
+                    }
+                }
+                $data['no'] = $item->dimensi->nomor.'.'.$item->nomor;
+                $data['content'] = $item->content;
+                $data['saran'] = $saran;
+                $data['ket'] = $ket;
+                array_push($kelemahan, $data);
+            }
+        }
+    @endphp
+    <div class="table-resposive">
+        <table class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="4" class="text-center bg-light">Kesesuaian</th>
+                </tr>
+                <tr>
+                    <td class="text-center">No</td>
+                    <td>Kriteria</td>
+                    <td>Komentar</td>
+                    <td class="text-center">Keterangan</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($kesesuaian as $index => $ks)
+                    <tr>
+                        <td class="text-center"><b>{{ $ks['no'] }}</b></td>
+                        <td>{{ $ks['content'] }}</td>
+                        <td>{{ $ks['saran'] }}</td>
+                        <td class="text-center">{{ $ks['ket'] }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-resposive">
+        <table class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="4" class="text-center bg-light">Kelemahan</th>
+                </tr>
+                <tr>
+                    <td class="text-center">No</td>
+                    <td>Kriteria</td>
+                    <td>Komentar</td>
+                    <td class="text-center">Keterangan</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($kelemahan as $index => $ks)
+                    <tr>
+                        <td class="text-center"><b>{{ $ks['no'] }}</b></td>
+                        <td>{{ $ks['content'] }}</td>
+                        <td>{{ $ks['saran'] }}</td>
+                        <td class="text-center">{{ $ks['ket'] }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     
  
 </body>

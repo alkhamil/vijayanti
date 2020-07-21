@@ -20,6 +20,7 @@ class KriteriaCtrl extends Controller
     {
         $criteria = new Criteria;
         $criteria->code = Str::upper($request->code);
+        $criteria->nomor = $request->nomor;
         $criteria->content = $request->content;
         $criteria->dimension_id = $request->dimension_id;
         $criteria->save();

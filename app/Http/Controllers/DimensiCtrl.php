@@ -19,6 +19,7 @@ class DimensiCtrl extends Controller
         $dimension = new Dimension;
         $dimension->code = Str::upper($request->code);
         $dimension->name = $request->name;
+        $dimension->nomor = $request->nomor;
         $dimension->description = $request->description;
         $dimension->save();
         return redirect('dimensi')->with('msg', 'Data dimensi berhasil dibuat!');

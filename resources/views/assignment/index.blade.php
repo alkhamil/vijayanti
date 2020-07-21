@@ -36,6 +36,7 @@
                                 <th>Checker</th>
                                 <th>Perusahaan</th>
                                 <th>Status</th>
+                                <th>Nilai Harapan</th>
                                 <th>Periode Bertugas</th>
                                 <th>Aksi</th>
                             </tr>
@@ -53,6 +54,9 @@
                                         @else
                                             <div class="badge badge-success">Selesai</div>
                                         @endif
+                                    </td>
+                                    <td>
+                                        {{ $a->nilai_harapan }}
                                     </td>
                                     <td class="text-center">{{ $a->bulan }}/{{ $a->tahun }}</td>
                                     <td>
@@ -160,6 +164,15 @@
                         <option value="{{ $cm->id }}">{{ $cm->name }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Set Nilai Harapan</label><br>
+                @for($i=1; $i<6; $i++)
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline{{ $i }}" name="nilai_harapan" value="{{ $i }}" class="custom-control-input" required>
+                        <label class="custom-control-label" for="customRadioInline{{ $i }}">{{ $i }}</label>
+                    </div>
+                @endfor
             </div>
         </div>
         <div class="modal-footer">

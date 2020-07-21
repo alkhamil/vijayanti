@@ -132,6 +132,7 @@
                 <div class="form-group">
                     <label>Kode Dimensi</label>
                     <input type="text" name="code" class="form-control" value="D{{ count($dimensions)+1 }}" readonly>
+                    <input type="hidden" name="nomor" class="form-control" value="{{ count($dimensions)+1 }}">
                 </div>
                 <div class="form-group">
                     <label>Nama Dimensi</label>
