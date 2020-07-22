@@ -9,22 +9,67 @@
 		table tr th{
 			font-size: 9pt;
 		}
+        hr {
+            height: 1px;
+            background: black;
+        }
 	</style>
 	<center>
-		<h5>LAPORAN HASIL SURVEY LAPANGAN <br> {{ $assign->company->name }} <br>PERIODE {{ $assign->bulan.'/'.$assign->tahun }}</h5>
-	</center>
-	<br>
-    <br>
-    <table>
+        <h5>LAPORAN HASIL SURVEY LAPANGAN <br> {{ $assign->company->name }}</h5>
+        <h6>PERIODE {{ $assign->bulan.'/'.$assign->tahun }}</h6>
+    </center>
+    <hr>
+	<table style="width: 100%">
         <tr>
-            <td>No SK</td>
-            <td>:</td>
-            <td>{{ $assign->code }}</td>
-        </tr>
-        <tr>
-            <td>Checker</td>
-            <td>:</td>
-            <td>{{ $assign->checker->name }}</td>
+            <td>
+                <table>
+                    <tr>
+                        <td><h5>Pemeriksa</h5></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>{{ $assign->company->name }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Checker</td>
+                        <td>:</td>
+                        <td>{{ $assign->checker->name }}</td>
+                    </tr>
+                    <tr>
+                        <td>No SK</td>
+                        <td>:</td>
+                        <td>{{ $assign->code }}</td>
+                    </tr>
+                </table>
+            </td>
+            <td style="color: white; width: 150px">TEST</td>
+            <td>
+                <table>
+                    <tr>
+                        <td style="text-align: right"><h5>Waktu Survey</h5></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal</td>
+                        <td>:</td>
+                        <td>{{ $assign->created_at }}</td>
+                    </tr>
+                    <tr style="color: white">
+                        <td>Checker</td>
+                        <td>:</td>
+                        <td>{{ $assign->checker->name }}</td>
+                    </tr>
+                    <tr style="color: white">
+                        <td>No SK</td>
+                        <td>:</td>
+                        <td>{{ $assign->code }}</td>
+                    </tr>
+                </table>
+            </td>
         </tr>
     </table>
     <br>
@@ -132,6 +177,18 @@
             </tbody>
         </table>
     </div>
+    <br>
+    <br>
+    <p>
+        Demikian disampaikan atas perhatian dan kerja samanya kami ucapkan terimakasih.
+        <br>
+        <br>
+        Hormat kami,
+        <br>
+        <br>
+        <br>
+        <b><u>{{ $assign->checker->name }}</u></b>
+    </p>
     
  
 </body>
