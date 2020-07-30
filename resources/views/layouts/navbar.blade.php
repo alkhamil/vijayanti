@@ -26,12 +26,12 @@
                     <span class="app-menu__label">Dashboard</span>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a @if($s1 == "user") class="app-menu__item active" @else class="app-menu__item" @endif href="{{ url('user') }}">
                     <i class="app-menu__icon fa fa-user"></i>
                     <span class="app-menu__label">User</span>
                 </a>
-            </li>
+            </li> --}}
             <li>
                 <a @if($s1 == "perusahaan") class="app-menu__item active" @else class="app-menu__item" @endif href="{{ url('perusahaan') }}">
                     <i class="app-menu__icon fa fa-briefcase"></i>

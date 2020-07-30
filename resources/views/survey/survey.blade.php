@@ -17,11 +17,11 @@
                         <input type="hidden" name="assign_id" value="{{$company->id}}">
                         <div class="col-sm-12">
                             <div class="pb-2 mt-2 mb-2">
-                                <span class="badge badge-info">1</span> <small class=""><b>SB</b>: Sangat Baik</small>
-                                <span class="badge badge-info">2</span> <small class=""><b>B</b>: Baik</small>
+                                <span class="badge badge-info">1</span> <small class=""><b>SKB</b>: Sangat Kurang Baik</small>
+                                <span class="badge badge-info">2</span> <small class=""><b>KB</b>: Kurang Baik</small>
                                 <span class="badge badge-info">3</span> <small class=""><b>CB</b>: Cukup Baik</small>
-                                <span class="badge badge-info">4</span> <small class=""><b>KB</b>: Kurang Baik</small>
-                                <span class="badge badge-info">5</span> <small class=""><b>SKB</b>: Sangat Kurang Baik</small>
+                                <span class="badge badge-info">4</span> <small class=""><b>B</b>: Baik</small>
+                                <span class="badge badge-info">5</span> <small class=""><b>SB</b>: Sangat Baik</small>
                             </div>
                             <table class="table table-bordered">
                                 <thead class="bg-light">

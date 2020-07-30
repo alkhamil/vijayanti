@@ -9,6 +9,7 @@ use App\Checker;
 use App\Kuisioner;
 use App\Criteria;
 use App\Dimension;
+use App\Bulan;
 use DB;
 use Mail;
 use PDF;
@@ -89,6 +90,24 @@ class AssignmentCtrl extends Controller
             }
             return redirect('assignment')->with('msg', 'Tugas '.$assign->code.' Selesai dan hasil survei telah dikirim via email ke '.$assign->company->name);
         }
+    }
+
+    public function jadwal(Request $request, $tahun)
+    {
+        $companies = Company::all();
+        $assign = Assignment::where('tahun', $tahun)->get();
+        $bulan = Bulan::all();
+        return view('assignment.jadwal', compact('tahun', 'companies', 'assign', 'bulan'));
+    }
+
+    public function cetak_jadwal(Request $request, $tahun)
+    {
+        $companies = Company::all();
+        $assign = Assignment::where('tahun', $tahun)->get();
+        $bulan = Bulan::all();
+        $patternFileName = "Jadwal-".$tahun;
+        $pdf = PDF::loadview('assignment.cetak_jadwal', compact('tahun', 'companies', 'assign', 'bulan'))->setPaper('a4', 'landscape');;
+        return $pdf->stream($patternFileName);
     }
 
     public function hapus(Request $request, $id)
