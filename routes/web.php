@@ -49,6 +49,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/assignment/tambah', 'AssignmentCtrl@tambah')->name('assignment.tambah');
         Route::get('/assignment/done/{id}', 'AssignmentCtrl@done')->name('assignment.done');
         Route::get('/assignment/hapus/{id}', 'AssignmentCtrl@hapus')->name('assignment.hapus');
+        Route::get('/assignment/jadwal/{tahun}', 'AssignmentCtrl@jadwal')->name('assignment.jadwal');
+        Route::get('/assignment/cetak-jadwal/{tahun}', 'AssignmentCtrl@cetak_jadwal')->name('assignment.catak_jadwal');
         
         Route::get('/dimensi', 'DimensiCtrl@index')->name('dimensi.index');
         Route::post('/dimensi/tambah', 'DimensiCtrl@tambah')->name('dimensi.tambah');

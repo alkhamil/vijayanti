@@ -15,6 +15,9 @@
         <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#tambah-assignment">
             <i class="fa fa-plus"></i> Tambah Assignment
         </button>
+        <button class="btn btn-info mb-2" data-toggle="modal" data-target="#lihat">
+            <i class="fa fa-calendar"></i> Lihat Jadwal
+        </button>
         @if (Session::has('msg'))
             <div class="alert alert-success mb-2">
                 {{ Session::get('msg') }}
@@ -183,17 +186,76 @@
     </div>
 </div>
 </div>
+
+<!-- Modal Add -->
+<div class="modal fade" id="lihat" tabindex="-1" role="dialog" aria-labelledby="lihatLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+    <div class="modal-header bg-primary text-white">
+        <div class="form-group">
+            <label>Pilih Tahun</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-calendar text-primary"></i>
+                    </div>
+                </div>
+                <input id="tahun" class="form-control" data-date-format="yyyy" autocomplete="off" required>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="row" id="load">
+            <div class="col-md-12">
+                <h3 class="text-center">
+                    <i class="fa fa-spin fa-spinner"></i> Loading ...
+                </h3>
+            </div>
+        </div>
+        <div class="row" id="data-jadwal">
+            
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+</div>
+</div>
 @endsection
 
 @section('script')
     <script>
+        $('#load').hide();
         $('.datepicker').datepicker({
             format: "mm-yyyy",
             viewMode: "months",
             minViewMode: "months",
             // endDate : (new Date('mm-yyyy') + '-01'),
             autoclose: true,
-            startDate: '-3d',
+            // startDate: '-3d',
+        });
+        $('#tahun').datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years",
+            // endDate : (new Date('mm-yyyy') + '-01'),
+            autoclose: true,
+            // startDate: '-3d',
+        }).on('change', function(){
+            $('#load').show();
+            $('#data-jadwal').html("");
+            var tahun = $(this).val();
+            var baseURL = "{{ url('/') }}";
+            var url = baseURL + '/assignment/jadwal/' + tahun;
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (response) {
+                    $('#data-jadwal').html(response);
+                    $('#load').hide();
+                }
+            });
         });
     </script>
 @endsection

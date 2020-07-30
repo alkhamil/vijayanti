@@ -11,7 +11,7 @@
  Target Server Version : 100408
  File Encoding         : 65001
 
- Date: 22/07/2020 18:32:29
+ Date: 31/07/2020 00:46:25
 */
 
 SET NAMES utf8mb4;
@@ -34,13 +34,41 @@ CREATE TABLE `assignments`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of assignments
 -- ----------------------------
 INSERT INTO `assignments` VALUES (31, 'SK/1595308492/1', 12, 13, 7, 2020, 1, NULL, 4, '2020-07-21 05:14:52', '2020-07-21 06:36:29');
 INSERT INTO `assignments` VALUES (32, 'SK/1595313693/2', 12, 13, 8, 2020, 1, NULL, 3, '2020-07-21 06:41:33', '2020-07-21 06:46:25');
+INSERT INTO `assignments` VALUES (33, 'SK/1596125116/3', 12, 13, 9, 2020, 0, NULL, 4, '2020-07-30 16:05:16', '2020-07-30 16:05:16');
+INSERT INTO `assignments` VALUES (34, 'SK/1596127224/4', 13, 14, 7, 2019, 0, NULL, 3, '2020-07-30 16:40:24', '2020-07-30 16:40:24');
+
+-- ----------------------------
+-- Table structure for bulan
+-- ----------------------------
+DROP TABLE IF EXISTS `bulan`;
+CREATE TABLE `bulan`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of bulan
+-- ----------------------------
+INSERT INTO `bulan` VALUES (1, 'Jan');
+INSERT INTO `bulan` VALUES (2, 'Feb');
+INSERT INTO `bulan` VALUES (3, 'Mar');
+INSERT INTO `bulan` VALUES (4, 'Apr');
+INSERT INTO `bulan` VALUES (5, 'Mei');
+INSERT INTO `bulan` VALUES (6, 'Jun');
+INSERT INTO `bulan` VALUES (7, 'Jul');
+INSERT INTO `bulan` VALUES (8, 'Aug');
+INSERT INTO `bulan` VALUES (9, 'Sep');
+INSERT INTO `bulan` VALUES (10, 'Okt');
+INSERT INTO `bulan` VALUES (11, 'Nov');
+INSERT INTO `bulan` VALUES (12, 'Des');
 
 -- ----------------------------
 -- Table structure for checkers
@@ -62,8 +90,8 @@ CREATE TABLE `checkers`  (
 -- ----------------------------
 -- Records of checkers
 -- ----------------------------
-INSERT INTO `checkers` VALUES (12, 18, 'AHMAD', '1998-05-20', 'ahmad@email.com', '08988878782', 0, '2020-06-30 15:32:53', '2020-07-21 06:46:25');
-INSERT INTO `checkers` VALUES (13, 19, 'BENY', '1997-07-12', 'beny@email.com', '08987888278', 0, '2020-06-30 15:33:21', '2020-06-30 15:51:44');
+INSERT INTO `checkers` VALUES (12, 18, 'AHMAD', '1998-05-20', 'ahmad@email.com', '08988878782', 1, '2020-06-30 15:32:53', '2020-07-30 16:05:16');
+INSERT INTO `checkers` VALUES (13, 19, 'BENY', '1997-07-12', 'beny@email.com', '08987888278', 1, '2020-06-30 15:33:21', '2020-07-30 16:40:24');
 INSERT INTO `checkers` VALUES (14, 20, 'RANGGA', '1998-05-30', 'ranga@email.com', '08988772878', 0, '2020-06-30 15:33:45', '2020-06-30 15:33:45');
 
 -- ----------------------------
@@ -86,8 +114,8 @@ CREATE TABLE `companies`  (
 -- ----------------------------
 -- Records of companies
 -- ----------------------------
-INSERT INTO `companies` VALUES (13, 'PT. JAYA ABADI', '081287738878', 'alkhamilnaz@gmail.com', 'jalan raya bekasi barat no 34', 'Bekasi', 0, '2020-06-30 15:34:38', '2020-07-21 06:46:25');
-INSERT INTO `companies` VALUES (14, 'PT. BAKTI RAHAYU', '081256367787', 'bintang.aksesoris2020@gmail.com', 'Jalan raya duren bekasi barat no 12', 'Bekasi Barat', 0, '2020-06-30 15:35:21', '2020-06-30 15:51:44');
+INSERT INTO `companies` VALUES (13, 'PT. JAYA ABADI', '081287738878', 'alkhamilnaz@gmail.com', 'jalan raya bekasi barat no 34', 'Bekasi', 1, '2020-06-30 15:34:38', '2020-07-30 16:05:16');
+INSERT INTO `companies` VALUES (14, 'PT. BAKTI RAHAYU', '081256367787', 'bintang.aksesoris2020@gmail.com', 'Jalan raya duren bekasi barat no 12', 'Bekasi Barat', 1, '2020-06-30 15:35:21', '2020-07-30 16:40:24');
 
 -- ----------------------------
 -- Table structure for criterias
@@ -279,7 +307,7 @@ CREATE TABLE `users`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `users_email_unique`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
@@ -288,5 +316,6 @@ INSERT INTO `users` VALUES (1, 1, 'korwil', 'korwil@email.com', '$2y$10$QVwALM/A
 INSERT INTO `users` VALUES (18, 2, 'CK120051998', 'ahmad@email.com', '$2y$10$YOSFWSPlBb4UrGkVPtzjoOecICmTub6xBLKqefgfIwnMr12DfOjjq', '2020-06-30 15:32:53', '2020-06-30 15:32:53');
 INSERT INTO `users` VALUES (19, 2, 'CK212071997', 'beny@email.com', '$2y$10$xZaWxt/IPNhf8DNLUQBMr.b7EkJypnyP0Wahy1VC7m9o8ayyQqq5S', '2020-06-30 15:33:21', '2020-06-30 15:33:21');
 INSERT INTO `users` VALUES (20, 2, 'CK330051998', 'ranga@email.com', '$2y$10$D8MKZaoTijtPaUwKXTGUkeW2ProGuD6PuHmhpSJFDtc0Jfc3XQuY.', '2020-06-30 15:33:45', '2020-06-30 15:33:45');
+INSERT INTO `users` VALUES (21, 1, 'admin', 'admin@email.com', '$2y$10$P5upueU1TftfjKnsjQVHR.OydN4gV6pX8aUCukp.q9XZYxruH8KyC', '2020-07-30 16:03:32', '2020-07-30 16:03:32');
 
 SET FOREIGN_KEY_CHECKS = 1;
